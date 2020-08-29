@@ -2,6 +2,8 @@ package com.prueba.transbank.infrastructure.entrypoints.rest;
 
 import com.prueba.transbank.domain.entities.user.User;
 import com.prueba.transbank.fixture.UserFixture;
+import com.prueba.transbank.fixture.UserRequestFixture;
+import com.prueba.transbank.infrastructure.entrypoints.rest.request.UserRequest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -21,14 +23,14 @@ public class ControllerTest {
     Controller controller;
 
     @Test
-    public void testLoginOk() {
+    public void testVerifyLoginSuccess() {
 
-        User user = UserFixture.create()
+        UserRequest userRequest = UserRequestFixture.create()
                 .withName(DEFAULT_NAME)
                 .withPassword(DEFAULT_PASSWORD)
                 .build();
 
-        ResponseEntity<String> responseEntity = controller.loginUser( user);
+        ResponseEntity<String> responseEntity = controller.loginUser( userRequest);
 
         assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
     }

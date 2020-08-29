@@ -29,14 +29,13 @@ public class UserTest {
 
     @Test(expected = InvalidPasswordException.class)
     public void  createUserWithInvalidSetPassword(){
-        User user = new User();
-        user.setPassword("");
+        User user = UserFixture.create().withName(DEFAULT_NAME).build();
+
     }
 
     @Test(expected = InvalidNameException.class)
     public void  createUserWithInvalidSetName(){
-        User user = new User();
-        user.setName("");
+        User user =  UserFixture.create().withPassword(DEFAULT_PASSWORD).build();
     }
 
 
@@ -51,18 +50,4 @@ public class UserTest {
         assertEquals(DEFAULT_PASSWORD, user.getPassword());
 
     }
-
-    @Test
-    public void createValidUserSetter(){
-        User user = new User();
-
-        user.setName(DEFAULT_NAME);
-        user.setPassword(DEFAULT_PASSWORD);
-
-        assertEquals(DEFAULT_NAME, user.getName());
-        assertEquals(DEFAULT_PASSWORD, user.getPassword());
-
-    }
-
-
 }
