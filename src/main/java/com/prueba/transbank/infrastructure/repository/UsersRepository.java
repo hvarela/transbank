@@ -14,6 +14,6 @@ public interface UsersRepository extends Repository<UserEntity, Integer>{
 
     List<UserEntity> findAll();
 
-    @Query(name = "AreaRepository.findByNamePassword")
+    @Query(name = "UsersRepository.findByNamePassword")
     Optional<UserEntity> findByNamePassword(String name, String password);
 }

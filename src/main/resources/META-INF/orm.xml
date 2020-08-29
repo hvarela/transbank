@@ -7,7 +7,7 @@
     <!-- JPA Named Queries -->
     <!-- AREA Named Queries -->
     <named-query name="UsersRepository.findByNamePassword">
-        <query>SELECT a FROM AreaEntity a WHERE a.name = ?1 and a,password = ?2</query>
+        <query>SELECT a FROM UserEntity a WHERE a.name = ?1 and a.password = ?2</query>
     </named-query>
 
 
