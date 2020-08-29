@@ -1,6 +1,7 @@
 package com.prueba.transbank.domain.usecase;
 
 import com.prueba.transbank.domain.entities.user.User;
+import com.prueba.transbank.domain.usecase.port.VerifyLoginUserDataProvide;
 import com.prueba.transbank.fixture.UserFixture;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +12,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LoginUserTest {
@@ -20,9 +23,12 @@ public class LoginUserTest {
 
     private LoginUser loginUser;
 
+    @Mock
+    VerifyLoginUserDataProvide verifyLoginUserDataProvide;
+
     @Before
     public void init(){
-        loginUser = new LoginUser();
+        loginUser = new LoginUser(verifyLoginUserDataProvide);
     }
 
     @Test
@@ -31,6 +37,8 @@ public class LoginUserTest {
                 .withName(NAME)
                 .withPassword(PASS)
                 .build();
+
+        when( verifyLoginUserDataProvide.loginUser(any(User.class))).thenReturn(true);
 
         assertTrue(loginUser.login(user));
     }
@@ -42,6 +50,8 @@ public class LoginUserTest {
                 .withName(NAME)
                 .withPassword(PASS)
                 .build();
+
+        when( verifyLoginUserDataProvide.loginUser(any(User.class))).thenReturn(false);
 
         assertFalse(loginUser.login(user));
     }
