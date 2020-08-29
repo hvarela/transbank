@@ -1,0 +1,62 @@
+apply plugin: 'info.solidsoft.pitest'
+apply plugin: 'jacoco'
+
+ext {
+    restAssuredVer = '3.1.1'
+    mockitoCoreVer = '2.21.0'
+    archUnitVersion = '0.9.3'
+    springWsVer='3.0.7.RELEASE'
+}
+
+dependencies {
+    testImplementation "io.rest-assured:json-path:${restAssuredVer}"
+    testImplementation "io.rest-assured:rest-assured:${restAssuredVer}"
+
+    // Spring testing facilities
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "com.tngtech.archunit:archunit-junit4:${archUnitVersion}"
+    testImplementation "org.springframework.ws:spring-ws-test:${springWsVer}"
+
+    testImplementation "org.mockito:mockito-core:${mockitoCoreVer}"
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation 'org.springframework.batch:spring-batch-test'
+}
+
+
+test {
+    useJUnitPlatform()
+}
+
+
+tasks.withType(Test){
+    testLogging {
+        exceptionFormat "full"
+        events "passed", "failed", "skipped"
+    }
+}
+
+pitest {
+    pitestVersion = '1.5.2'
+    targetClasses = ['com.prueba.transbank.*']
+    testSourceSets = [sourceSets.unitTest]
+    excludedClasses = [
+            'com.prueba.transbank.infrastructure.entities.*'
+            ]
+    threads = 4
+    outputFormats = ['XML', 'HTML']
+    coverageThreshold = 90
+    mutationThreshold = 90
+    timestampedReports = false
+    timeoutFactor = '5000'
+    enableDefaultIncrementalAnalysis = true
+}
+
+jacocoTestReport {
+    executionData.from = fileTree(buildDir).include("/jacoco/*.exec")
+    reports {
+        xml.enabled true
+    }
+}

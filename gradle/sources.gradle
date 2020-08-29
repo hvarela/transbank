@@ -1,0 +1,33 @@
+sourceSets {
+
+    commons {
+        java {
+            srcDir 'src/test/commons/java'
+        }
+        compileClasspath += sourceSets.main.runtimeClasspath
+        compileClasspath += sourceSets.test.compileClasspath
+        runtimeClasspath = output + compileClasspath
+    }
+
+    unitTest {
+        java {
+            srcDir 'src/test/unitTest/java'
+        }
+        resources {
+            srcDir 'src/test/unitTest/resources'
+        }
+        compileClasspath += sourceSets.main.runtimeClasspath
+        compileClasspath += sourceSets.commons.runtimeClasspath
+        compileClasspath += sourceSets.test.compileClasspath
+        runtimeClasspath = output + compileClasspath
+    }
+
+
+}
+
+task unitTest(type: Test) {
+    description = "Runs Unit Tests"
+    testClassesDirs = sourceSets.unitTest.output.classesDirs
+    classpath = sourceSets.unitTest.runtimeClasspath
+}
+

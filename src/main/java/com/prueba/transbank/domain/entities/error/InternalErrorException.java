@@ -13,11 +13,6 @@ public class InternalErrorException extends RuntimeException {
         this.errorType = errorType;
     }
 
-    public InternalErrorException(ErrorType errorType, String message, Exception exception) {
-        super(message, exception);
-        this.errorType = errorType;
-    }
-
     public ErrorType getErrorType() {
         return errorType;
     }

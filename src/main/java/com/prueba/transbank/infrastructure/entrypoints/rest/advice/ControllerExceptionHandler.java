@@ -41,7 +41,7 @@ public class ControllerExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ApiError handleRuntimeValidations(RuntimeException e) {
         logger.error(e.getMessage());
-        return new ApiError(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), "RuntimeException", e.getMessage());
+        return new ApiError(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), "handleRuntimeValidations", e.getMessage());
     }
 
 }
