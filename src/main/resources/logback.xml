@@ -1,0 +1,21 @@
+<configuration>
+
+    <conversionRule conversionWord="loggingSequence" converterClass="com.prueba.transbank.infrastructure.logger.AtomicSequenceConverter" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date{yyyy/MM/dd HH:mm:ss.SSS} level=%level log_order=%loggingSequence pkg=%logger  msg= %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+
+    <logger name="com.prueba.transbank" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"></appender-ref>
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+    </root>
+
+</configuration>
