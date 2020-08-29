@@ -17,22 +17,22 @@ public class PackagesLayerDependenciesRuleTest {
 
     @ArchTest
     public static final ArchRule entitiesShouldNotDependOnOtherPackages =
-            ArchRuleDefinition.noClasses().that().resideInAPackage("..entities..")
-                    .should().dependOnClassesThat().resideInAnyPackage("..usecase..", "..infrastructure..");
+            ArchRuleDefinition.classes().that().resideInAPackage("..domain.entities..")
+                    .should().dependOnClassesThat().resideInAnyPackage("..domain.entities..", "java..");
 
     @ArchTest
     public static final ArchRule domainShouldNotDependOnOtherPackages =
-            ArchRuleDefinition.noClasses().that().resideInAPackage("..domain..")
-                    .should().dependOnClassesThat().resideInAPackage("..infrastructure..");
+            ArchRuleDefinition.noClasses().that().resideInAnyPackage("..transbank.domain..")
+                    .should().dependOnClassesThat().resideOutsideOfPackages("..transbank.domain..", "java..", "org.slf4j..", "");
 
 
     @ArchTest
     public static final ArchRule usecaseShouldResideInDomainPackage =
-            ArchRuleDefinition.classes().that().resideInAPackage(".*usecase")
-                    .should().resideInAPackage("..domain..");
+            ArchRuleDefinition.classes().that().resideInAPackage("..usecase")
+                    .should().dependOnClassesThat().resideInAnyPackage("..domain..");
 
     @ArchTest
-    public static final ArchRule useCasehouldOnlyBeAccessedByEntrypointsOrOtherUsecaseOrSpringConfigure =
+    public static final ArchRule useCaseShouldOnlyBeAccessedByEntrypointsOrOtherUsecaseOrSpringConfigure =
             ArchRuleDefinition.classes().that().resideInAPackage("..usecase..")
                     .should().onlyBeAccessed().byAnyPackage( "..usecase..", "..entrypoints..","..infrastructure.configuration..");
 
