@@ -1,4 +1,4 @@
-package com.prueba.transbank.infrastructure.entrypoints.rest.user;
+package com.prueba.transbank.infrastructure.entrypoints.rest.request;
 
 
 public class UserRequest  {

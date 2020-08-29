@@ -3,19 +3,16 @@ package com.prueba.transbank.infrastructure.entrypoints.rest;
 
 import com.prueba.transbank.domain.entities.user.User;
 import com.prueba.transbank.infrastructure.entrypoints.rest.translator.UserRequestTranslator;
-import com.prueba.transbank.infrastructure.entrypoints.rest.user.UserRequest;
+import com.prueba.transbank.infrastructure.entrypoints.rest.request.UserRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/restaurant")
@@ -30,7 +27,7 @@ public class Controller {
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
     ResponseEntity<String> loginUser(@RequestBody UserRequest userRequest){
-        logger.info( String.format("login  user [%s] pass[%s]", userRequest.getName(), userRequest.getPassword()) );
+        logger.info( String.format("login  request [%s] pass[%s]", userRequest.getName(), userRequest.getPassword()) );
 
         User user = UserRequestTranslator.translate(userRequest);
 
