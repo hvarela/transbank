@@ -4,3 +4,31 @@ server:
   port: 8081
   servlet:
     context-path: /${name}/v1
+
+
+spring:
+  application:
+    name: ${name}
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:transbank
+    username: root
+    password: pass
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    database: H2
+    openInView: false
+    show_sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+      naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
+    properties:
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: true
