@@ -25,8 +25,9 @@ public class Controller {
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
     ResponseEntity<String> loginUser(@RequestBody User user){
-
         logger.info( String.format("login  user [%s] pass[%s]", user.getName(), user.getPassword()) );
+        user.validate();
+
         return  new ResponseEntity<>("", HttpStatus.NO_CONTENT);
     }
 

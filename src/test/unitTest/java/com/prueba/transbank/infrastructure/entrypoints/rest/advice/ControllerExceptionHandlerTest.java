@@ -1,9 +1,6 @@
 package com.prueba.transbank.infrastructure.entrypoints.rest.advice;
 
-import com.prueba.transbank.domain.entities.error.ApiError;
-import com.prueba.transbank.domain.entities.error.InternalErrorException;
-import com.prueba.transbank.domain.entities.error.InvalidNameException;
-import com.prueba.transbank.domain.entities.error.InvalidPasswordException;
+import com.prueba.transbank.domain.entities.error.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(JUnit4.class)
 public class ControllerExceptionHandlerTest {
 
-    private static final String MSG_INVALID="invalido";
+    private static final  String MSG_ERROR = "error runtime";
 
     private ControllerExceptionHandler controllerExceptionHandler;
 
@@ -37,36 +34,36 @@ public class ControllerExceptionHandlerTest {
     @Test
     public void handleRequestLoginNameValidations() {
 
-        ApiError apiError = controllerExceptionHandler.handleRequestLoginNameValidations(new InvalidNameException(MSG_INVALID));
+        ApiError apiError = controllerExceptionHandler.handleRequestLoginNameValidations(new InvalidNameException());
 
-        assertEquals(MSG_INVALID, apiError.getError());
+        assertEquals(ErrorType.INVALID_NAME.getDescription(), apiError.getError());
         assertEquals(HttpStatus.BAD_REQUEST.getReasonPhrase(), apiError.getStatus());
         assertEquals(getMethodName(), apiError.getMessage());
     }
 
     @Test
     public void handleRequestLoginPasswordValidations() {
-        ApiError apiError = controllerExceptionHandler.handleRequestLoginPasswordValidations(new InvalidPasswordException(MSG_INVALID));
+        ApiError apiError = controllerExceptionHandler.handleRequestLoginPasswordValidations(new InvalidPasswordException());
 
-        assertEquals(MSG_INVALID, apiError.getError());
+        assertEquals(ErrorType.INVALID_PASSWORD.getDescription(), apiError.getError());
         assertEquals(HttpStatus.BAD_REQUEST.getReasonPhrase(), apiError.getStatus());
         assertEquals(getMethodName(), apiError.getMessage());
     }
 
     @Test
     public void handleInternalErrorValidations() {
-        ApiError apiError = controllerExceptionHandler.handleInternalErrorValidations(new InternalErrorException(MSG_INVALID));
+        ApiError apiError = controllerExceptionHandler.handleInternalErrorValidations(new InternalErrorException());
 
-        assertEquals(MSG_INVALID, apiError.getError());
+        assertEquals(ErrorType.UNEXPECTED_ERROR.getDescription(), apiError.getError());
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), apiError.getStatus());
         assertEquals(getMethodName(), apiError.getMessage());
     }
 
     @Test
     public void handleRuntimeValidations() {
-        ApiError apiError = controllerExceptionHandler.handleRuntimeValidations(new RuntimeException(MSG_INVALID));
+        ApiError apiError = controllerExceptionHandler.handleRuntimeValidations(new RuntimeException(MSG_ERROR));
 
-        assertEquals(MSG_INVALID, apiError.getError());
+        assertEquals(MSG_ERROR, apiError.getError());
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), apiError.getStatus());
         assertEquals(getMethodName(), apiError.getMessage());
     }

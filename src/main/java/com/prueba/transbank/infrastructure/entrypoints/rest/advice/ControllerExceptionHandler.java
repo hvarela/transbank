@@ -40,7 +40,7 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ApiError handleRuntimeValidations(RuntimeException e) {
-        logger.error(e.getMessage());
+        logger.error("exception inesperada ",e);
         return new ApiError(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), "handleRuntimeValidations", e.getMessage());
     }
 

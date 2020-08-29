@@ -2,9 +2,9 @@ package com.prueba.transbank.domain.entities.error;
 
 public enum ErrorType {
 
-    UNEXPECTED_ERROR("FD00", "error  inesperado"),
-    INVALID_NAME("FD01", "nombre no debe ser nulo o vacio"),
-    INVALID_PASSWORD("FD02", "password no debe ser nulo o vacio");
+    UNEXPECTED_ERROR("FD00", "unexpected error"),
+    INVALID_NAME("FD01", "name  is null or empty"),
+    INVALID_PASSWORD("FD02", "password is null or empty");
 
     private final String code;
     private final String description;

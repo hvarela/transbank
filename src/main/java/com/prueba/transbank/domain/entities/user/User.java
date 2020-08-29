@@ -13,12 +13,9 @@ public class User implements Serializable{
     public User(){}
 
     public User(String name, String password){
-        validateName(name);
-        validatePassword(password);
-
         this.name = name;
         this.password = password;
-
+        validate();
     }
 
     public String getPassword() {
@@ -29,22 +26,27 @@ public class User implements Serializable{
         return name;
     }
 
-    public void setName(String name) {
-        validateName(name);
+    public void setName(String name){
         this.name = name;
+        validateName();
     }
 
     public void setPassword(String password) {
-        validatePassword(password);
         this.password = password;
+        validatePassword();
     }
 
-    private void  validateName(String name){
-        if(name.isEmpty()) throw  new InvalidNameException("el campo nombre es vacio");
+    public  void validate(){
+        validateName();
+        validatePassword();
     }
 
-    private void validatePassword(String password){
-        if(password.isEmpty()) throw  new InvalidPasswordException("el campo password es vacio");
+    private void  validateName(){
+        if(this.name == null ||  this.name.isEmpty()) throw  new InvalidNameException();
+    }
+
+    private void validatePassword(){
+        if(this.password == null || this.password.isEmpty()) throw  new InvalidPasswordException();
     }
 
 
