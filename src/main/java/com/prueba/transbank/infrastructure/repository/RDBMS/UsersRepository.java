@@ -1,4 +1,4 @@
-package com.prueba.transbank.infrastructure.repository;
+package com.prueba.transbank.infrastructure.repository.RDBMS;
 
 
 import com.prueba.transbank.infrastructure.entities.UserEntity;
