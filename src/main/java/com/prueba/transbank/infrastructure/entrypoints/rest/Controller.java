@@ -1,8 +1,13 @@
 package com.prueba.transbank.infrastructure.entrypoints.rest;
 
 
+import com.prueba.transbank.domain.entities.user.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,10 +21,13 @@ public class Controller {
 
     @RequestMapping(
             value= "/login",
-            method = RequestMethod.POST
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    void loginUser(){
-        logger.info("login");
+    ResponseEntity<String> loginUser(@RequestBody User user){
+
+        logger.info( String.format("login  user [%s] pass[%s]", user.getName(), user.getPassword()) );
+        return  new ResponseEntity<>("", HttpStatus.NO_CONTENT);
     }
 
     @RequestMapping(
