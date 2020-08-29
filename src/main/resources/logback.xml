@@ -4,7 +4,7 @@
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%date{yyyy/MM/dd HH:mm:ss.SSS} level=%level log_order=%loggingSequence pkg=%logger  msg= %msg%n</pattern>
+            <pattern>%date{yyyy/MM/dd HH:mm:ss.SSS} level=%level log_order=%loggingSequence pkg=%logger  %msg%n</pattern>
         </encoder>
     </appender>
 
@@ -14,7 +14,7 @@
         <appender-ref ref="STDOUT"></appender-ref>
     </logger>
 
-    <logger name="org.hibernate.engine.internal.StatisticalLoggingSessionEventListener" level="ERROR" additivity="false">
+    <logger name="org.hibernate.engine" level="ERROR" additivity="false">
         <appender-ref ref="STDOUT"></appender-ref>
     </logger>
 

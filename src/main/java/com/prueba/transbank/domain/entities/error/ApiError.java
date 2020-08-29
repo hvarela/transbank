@@ -6,15 +6,15 @@ import java.util.StringJoiner;
 public class ApiError {
 
     private String status;
-    private String message;
+    private String handler;
     private String error;
 
     public ApiError() {
     }
 
-    public ApiError(String httpStatus, String message, String error) {
+    public ApiError(String httpStatus, String handler, String error) {
         this.status = httpStatus;
-        this.message = message;
+        this.handler = handler;
         this.error =  error;
     }
 
@@ -22,12 +22,12 @@ public class ApiError {
         return status;
     }
 
-    public String getMessage() {
-        return message;
+    public String getHandler() {
+        return handler;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setHandler(String handler) {
+        this.handler = handler;
     }
 
     public String getError() {
@@ -47,7 +47,7 @@ public class ApiError {
         ApiError apiError = (ApiError) o;
 
         return  this.error == apiError.error &&
-                this.message == apiError.message &&
+                this.handler == apiError.handler &&
                 this.status == apiError.status;
 
     }
@@ -56,13 +56,13 @@ public class ApiError {
     public String toString() {
         return new StringJoiner(", ", "ApiError" + "[", "]")
                 .add("status=" + status)
-                .add("message='" + message + "'")
+                .add("handler='" + handler + "'")
                 .add("errors=" + error)
                 .toString();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getStatus(), getMessage(), getError());
+        return Objects.hash(getStatus(), getHandler(), getError());
     }
 }

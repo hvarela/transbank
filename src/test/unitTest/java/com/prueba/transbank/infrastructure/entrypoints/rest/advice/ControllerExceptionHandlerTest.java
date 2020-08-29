@@ -38,7 +38,7 @@ public class ControllerExceptionHandlerTest {
 
         assertEquals(ErrorType.INVALID_NAME.getDescription(), apiError.getError());
         assertEquals(HttpStatus.BAD_REQUEST.getReasonPhrase(), apiError.getStatus());
-        assertEquals(getMethodName(), apiError.getMessage());
+        assertEquals(getMethodName(), apiError.getHandler());
     }
 
     @Test
@@ -47,7 +47,7 @@ public class ControllerExceptionHandlerTest {
 
         assertEquals(ErrorType.INVALID_PASSWORD.getDescription(), apiError.getError());
         assertEquals(HttpStatus.BAD_REQUEST.getReasonPhrase(), apiError.getStatus());
-        assertEquals(getMethodName(), apiError.getMessage());
+        assertEquals(getMethodName(), apiError.getHandler());
     }
 
     @Test
@@ -56,7 +56,7 @@ public class ControllerExceptionHandlerTest {
 
         assertEquals(ErrorType.UNEXPECTED_ERROR.getDescription(), apiError.getError());
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), apiError.getStatus());
-        assertEquals(getMethodName(), apiError.getMessage());
+        assertEquals(getMethodName(), apiError.getHandler());
     }
 
     @Test
@@ -65,6 +65,6 @@ public class ControllerExceptionHandlerTest {
 
         assertEquals(MSG_ERROR, apiError.getError());
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), apiError.getStatus());
-        assertEquals(getMethodName(), apiError.getMessage());
+        assertEquals(getMethodName(), apiError.getHandler());
     }
 }
