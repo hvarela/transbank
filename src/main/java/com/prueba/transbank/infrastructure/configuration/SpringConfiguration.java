@@ -12,6 +12,7 @@ public class SpringConfiguration {
 
     private VerifyLoginUserRepository verifyLoginUserRepository;
 
+    @Autowired
     SpringConfiguration(VerifyLoginUserRepository verifyLoginUserRepository){
         this.verifyLoginUserRepository = verifyLoginUserRepository;
     }
