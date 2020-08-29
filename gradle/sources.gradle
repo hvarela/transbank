@@ -22,6 +22,19 @@ sourceSets {
         runtimeClasspath = output + compileClasspath
     }
 
+    architectureTest {
+        java {
+            srcDir 'src/test/architectureTest/java'
+        }
+        resources {
+            srcDir 'src/test/architectureTest/resources'
+        }
+        compileClasspath += sourceSets.main.runtimeClasspath
+        compileClasspath += sourceSets.commons.runtimeClasspath
+        compileClasspath += sourceSets.test.compileClasspath
+        runtimeClasspath = output + compileClasspath
+    }
+
 
 }
 
@@ -31,3 +44,8 @@ task unitTest(type: Test) {
     classpath = sourceSets.unitTest.runtimeClasspath
 }
 
+task architectureTest(type: Test) {
+    description = "Runs Architecture Tests"
+    testClassesDirs = sourceSets.architectureTest.output.classesDirs
+    classpath = sourceSets.architectureTest.runtimeClasspath
+}
