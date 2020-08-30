@@ -19,30 +19,31 @@ public class JwtTokenManagerTest {
     private JwtTokenManager jwtTokenManager;
     private String key;
     private AlgorithmKeyManager algorithmKeyManager;
+    private static final String ISSUER ="test";
 
     @Before
     public  void init(){
         key="12345";
         algorithmKeyManager = new AlgorithmKeyManager("12312312313dsadafddsaqd");
-        jwtTokenManager = new JwtTokenManager(algorithmKeyManager);
+        jwtTokenManager = new JwtTokenManager(algorithmKeyManager, 2, ISSUER);
     }
 
     @Test
     public void genereteToken()  {
 
-        String token = jwtTokenManager.generateToken("tito1234", 20);
+        String token = jwtTokenManager.generateToken("tito1234");
 
         DecodedJWT decode = JWT.decode(token);
 
         assertEquals("tito1234",  decode.getClaim("user").asString());
-        assertEquals("transbank",  decode.getIssuer());
+        assertEquals(ISSUER,  decode.getIssuer());
 
     }
 
     @Test
     public void veryfyIfTokenIsValid()  {
 
-        String token = jwtTokenManager.generateToken("tito1234", 20);
+        String token = jwtTokenManager.generateToken("tito1234");
 
         assertTrue(jwtTokenManager.isValidToken(token));
 
@@ -51,9 +52,9 @@ public class JwtTokenManagerTest {
     @Test(expected = InvalidTokenException.class)
     public void veryfyIfExpireToken() throws InterruptedException {
 
-        String token = jwtTokenManager.generateToken("tito1234", 1);
+        String token = jwtTokenManager.generateToken("tito1234");
 
-        TimeUnit.SECONDS.sleep(2);
+        TimeUnit.SECONDS.sleep(3);
 
         jwtTokenManager.isValidToken(token);
 

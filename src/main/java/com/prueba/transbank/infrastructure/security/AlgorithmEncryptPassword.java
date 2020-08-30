@@ -22,13 +22,9 @@ public class AlgorithmEncryptPassword implements AlgorithmEncryptPasswordDataPro
     private Logger logger = LoggerFactory.getLogger(AlgorithmEncryptPassword.class);
 
 
-
     private  String  salt;
-
     private  int keyLength;
-
     private  int iteration;
-
     private String algorithm;
 
     public AlgorithmEncryptPassword(  @Value("${algorithmEncryptpassword.salt}") String salt,

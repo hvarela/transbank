@@ -36,13 +36,15 @@ public class ControllerTest {
     @Test
     public void testVerifyLoginSuccess() {
 
+        String token="dasdakdmkmda";
+
         UserRequest userRequest = UserRequestFixture.create()
                 .withName(DEFAULT_NAME)
                 .withPassword(DEFAULT_PASSWORD)
                 .build();
 
 
-        when( loginUser.login(any(User.class) ) ).thenReturn(true);
+        when( loginUser.login(any(User.class) ) ).thenReturn(token);
 
         ResponseEntity<String> responseEntity = controller.loginUser(userRequest);
 
