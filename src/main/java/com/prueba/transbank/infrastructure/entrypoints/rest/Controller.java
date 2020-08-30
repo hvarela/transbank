@@ -3,7 +3,7 @@ package com.prueba.transbank.infrastructure.entrypoints.rest;
 
 import com.prueba.transbank.domain.entities.user.User;
 import com.prueba.transbank.domain.usecase.LoginUser;
-import com.prueba.transbank.infrastructure.entrypoints.rest.request.UserRequest;
+import com.prueba.transbank.infrastructure.entrypoints.rest.request.LoginRequest;
 import com.prueba.transbank.infrastructure.entrypoints.rest.translator.UserRequestTranslator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,12 +34,12 @@ public class Controller {
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    ResponseEntity<String> loginUser(@RequestBody UserRequest userRequest){
-        logger.info( String.format("login  request [%s] pass[%s]", userRequest.getName(), userRequest.getPassword()) );
+    ResponseEntity<String> loginUser(@RequestBody LoginRequest loginRequest){
+        logger.info( String.format("login  request [%s] pass[%s]", loginRequest.getName(), loginRequest.getPassword()) );
 
-        User user = UserRequestTranslator.translate(userRequest);
+        User user = UserRequestTranslator.translate(loginRequest);
 
-        loginUser.login(user);
+        String token = loginUser.login(user);
 
         return  new ResponseEntity<>("", HttpStatus.NO_CONTENT);
 

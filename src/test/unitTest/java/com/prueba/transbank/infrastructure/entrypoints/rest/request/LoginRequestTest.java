@@ -8,30 +8,30 @@ import org.junit.runners.JUnit4;
 import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
-public class UserRequestTest {
+public class LoginRequestTest {
 
     private static final String NAME = "tito";
     private static final String PASS = "12345";
 
     @Test
     public void testVerifyCreateUserRequestConstructor() {
-        UserRequest userRequest  = UserRequestFixture.create()
+        LoginRequest loginRequest = UserRequestFixture.create()
                 .withName(NAME)
                 .withPassword(PASS)
                 .build();
 
-        assertEquals(NAME, userRequest.getName());
-        assertEquals(PASS, userRequest.getPassword());
+        assertEquals(NAME, loginRequest.getName());
+        assertEquals(PASS, loginRequest.getPassword());
     }
 
     @Test
     public void testVerifyCreateUserRequestSetter() {
-        UserRequest userRequest  = UserRequestFixture.create().build();
+        LoginRequest loginRequest = UserRequestFixture.create().build();
 
-        userRequest.setName(NAME);
-        userRequest.setPassword(PASS);
+        loginRequest.setName(NAME);
+        loginRequest.setPassword(PASS);
 
-        assertEquals(NAME, userRequest.getName());
-        assertEquals(PASS, userRequest.getPassword());
+        assertEquals(NAME, loginRequest.getName());
+        assertEquals(PASS, loginRequest.getPassword());
     }
 }

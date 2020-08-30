@@ -1,10 +1,9 @@
 package com.prueba.transbank.fixture;
 
 
-import com.prueba.transbank.domain.entities.user.User;
-import com.prueba.transbank.infrastructure.entrypoints.rest.request.UserRequest;
+import com.prueba.transbank.infrastructure.entrypoints.rest.request.LoginRequest;
 
-public class UserRequestFixture extends AbstractFixture<UserRequest> {
+public class UserRequestFixture extends AbstractFixture<LoginRequest> {
 
     private static final  String  DEFAULT_NAME= "";
     private static final  String  DEFAULT_PASSWORD= "";
@@ -31,7 +30,7 @@ public class UserRequestFixture extends AbstractFixture<UserRequest> {
         return this;
     }
 
-    public UserRequest build() {
-        return new UserRequest(this.name, this.password);
+    public LoginRequest build() {
+        return new LoginRequest(this.name, this.password);
     }
 }

@@ -3,7 +3,7 @@ package com.prueba.transbank.infrastructure.entrypoints.rest;
 import com.prueba.transbank.domain.entities.user.User;
 import com.prueba.transbank.domain.usecase.LoginUser;
 import com.prueba.transbank.fixture.UserRequestFixture;
-import com.prueba.transbank.infrastructure.entrypoints.rest.request.UserRequest;
+import com.prueba.transbank.infrastructure.entrypoints.rest.request.LoginRequest;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,7 +38,7 @@ public class ControllerTest {
 
         String token="dasdakdmkmda";
 
-        UserRequest userRequest = UserRequestFixture.create()
+        LoginRequest loginRequest = UserRequestFixture.create()
                 .withName(DEFAULT_NAME)
                 .withPassword(DEFAULT_PASSWORD)
                 .build();
@@ -46,7 +46,7 @@ public class ControllerTest {
 
         when( loginUser.login(any(User.class) ) ).thenReturn(token);
 
-        ResponseEntity<String> responseEntity = controller.loginUser(userRequest);
+        ResponseEntity<String> responseEntity = controller.loginUser(loginRequest);
 
         assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
     }

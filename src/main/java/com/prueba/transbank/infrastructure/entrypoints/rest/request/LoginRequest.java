@@ -1,14 +1,14 @@
 package com.prueba.transbank.infrastructure.entrypoints.rest.request;
 
 
-public class UserRequest  {
+public class LoginRequest {
 
     private String name;
     private String password;
 
-    public UserRequest(){}
+    public LoginRequest(){}
 
-    public  UserRequest(String name, String password){
+    public LoginRequest(String name, String password){
         this.name = name;
         this.password = password;
     }
