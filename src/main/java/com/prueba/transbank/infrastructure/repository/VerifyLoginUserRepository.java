@@ -1,6 +1,5 @@
 package com.prueba.transbank.infrastructure.repository;
 
-import com.prueba.transbank.domain.entities.user.User;
 import com.prueba.transbank.domain.usecase.port.VerifyLoginUserDataProvide;
 import com.prueba.transbank.infrastructure.entities.UserEntity;
 import com.prueba.transbank.infrastructure.repository.RDBMS.UsersRepository;

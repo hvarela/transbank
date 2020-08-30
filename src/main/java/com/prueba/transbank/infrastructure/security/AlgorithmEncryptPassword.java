@@ -1,4 +1,11 @@
-package com.prueba.transbank.domain.security;
+package com.prueba.transbank.infrastructure.security;
+
+import com.prueba.transbank.domain.usecase.port.AlgorithmEncryptPasswordDataProvide;
+import com.prueba.transbank.infrastructure.repository.VerifyLoginUserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -7,13 +14,19 @@ import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
 import java.util.Base64;
 
-public class PasswordUtils {
+@Repository
+public class AlgorithmEncryptPassword implements AlgorithmEncryptPasswordDataProvide {
 
-    private  static final String  SALT="pruebaTL";
+    private Logger logger = LoggerFactory.getLogger(AlgorithmEncryptPassword.class);
+
+
+    private static final String  SALT="pruebaTL";
     private static final int KEY_LENGTH = 512;
     private static final int ITERATIONS = 10000;
 
-    private static byte[] hash(char[] password) {
+    public AlgorithmEncryptPassword(){}
+
+    private  byte[] hash(char[] password) {
         PBEKeySpec spec = new PBEKeySpec(password,  SALT.getBytes(), ITERATIONS, KEY_LENGTH);
         Arrays.fill(password, Character.MIN_VALUE);
         try {
@@ -26,7 +39,9 @@ public class PasswordUtils {
         }
     }
 
-    public static String generateSecurePassword(String password) {
+
+    @Override
+    public String generateSecurePassword(String password) {
         String returnValue = null;
 
 
@@ -36,6 +51,4 @@ public class PasswordUtils {
 
         return returnValue;
     }
-
-
 }
