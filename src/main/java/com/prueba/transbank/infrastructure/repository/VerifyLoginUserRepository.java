@@ -24,7 +24,7 @@ public class VerifyLoginUserRepository implements VerifyLoginUserDataProvide {
 
     @Override
     public boolean loginUser(String name, String encrytedPass) {
-        logger.info( String.format("Buscando en BD  usuario   name [%s]  password [%s]", name, encrytedPass));
+        logger.debug( String.format("Buscando en BD  usuario   name [%s]  password [%.10s...]", name, encrytedPass));
         Optional<UserEntity> userEntity = usersRepository.findByNamePassword(name, encrytedPass);
 
         return userEntity.isPresent();
