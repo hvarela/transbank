@@ -23,7 +23,7 @@ public class PackagesLayerDependenciesRuleTest {
     @ArchTest
     public static final ArchRule domainShouldNotDependOnOtherPackages =
             ArchRuleDefinition.noClasses().that().resideInAnyPackage("..transbank.domain..")
-                    .should().dependOnClassesThat().resideOutsideOfPackages("..transbank.domain..", "java..", "org.slf4j..", "");
+                    .should().dependOnClassesThat().resideOutsideOfPackages("..transbank.domain..", "java..", "org.slf4j..", "javax..", "");
 
 
     @ArchTest
