@@ -20,8 +20,8 @@ public class AlgorithmEncryptPassword implements AlgorithmEncryptPasswordDataPro
 
     private Logger logger = LoggerFactory.getLogger(AlgorithmEncryptPassword.class);
 
-    @Value("${algorithmencryptpassword.salt}")
-    private String  SALT;
+
+    private static final String  SALT="pruebaTL";
     private static final int KEY_LENGTH = 512;
     private static final int ITERATIONS = 10000;
 
