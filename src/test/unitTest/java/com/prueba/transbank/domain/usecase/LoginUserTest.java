@@ -21,6 +21,7 @@ public class LoginUserTest {
     private static final String  PASS= "123";
 
     private LoginUser loginUser;
+    private User user;
 
     @Mock
     VerifyLoginUserDataProvide verifyLoginUserDataProvide;
@@ -28,16 +29,16 @@ public class LoginUserTest {
     @Before
     public void init(){
         loginUser = new LoginUser(verifyLoginUserDataProvide);
+        user =  UserFixture.create()
+                .withName(NAME)
+                .withPassword(PASS)
+                .build();
     }
 
     @Test
     public void  verifyLoginSuccess(){
-        User user = UserFixture.create()
-                .withName(NAME)
-                .withPassword(PASS)
-                .build();
 
-        when( verifyLoginUserDataProvide.loginUser(any(User.class))).thenReturn(true);
+        when( verifyLoginUserDataProvide.loginUser(any(String.class),any(String.class))).thenReturn(true);
 
         assertTrue(loginUser.login(user));
     }
@@ -45,12 +46,8 @@ public class LoginUserTest {
 
     @Test(expected = LoginErrorException.class)
     public void  verifyLoginError(){
-        User user = UserFixture.create()
-                .withName(NAME)
-                .withPassword(PASS)
-                .build();
 
-        when( verifyLoginUserDataProvide.loginUser(any(User.class))).thenReturn(false);
+        when( verifyLoginUserDataProvide.loginUser(any(String.class),any(String.class))).thenReturn(false);
 
         loginUser.login(user);
     }
