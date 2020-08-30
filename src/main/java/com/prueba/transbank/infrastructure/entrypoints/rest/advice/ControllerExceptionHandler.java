@@ -35,6 +35,15 @@ public class ControllerExceptionHandler {
         return new ApiError(HttpStatus.UNAUTHORIZED.getReasonPhrase(), "handleLoginErrorValidations", e.getMessage());
     }
 
+    @ExceptionHandler(InvalidTokenException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ApiError handleInvalidTokenValidations(InvalidTokenException e) {
+        logger.error("token invalido");
+        return new ApiError(HttpStatus.UNAUTHORIZED.getReasonPhrase(), "handleInvalidTokenValidations", e.getMessage());
+    }
+
+
+
     @ExceptionHandler(InternalErrorException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ApiError handleInternalErrorValidations(InternalErrorException e) {

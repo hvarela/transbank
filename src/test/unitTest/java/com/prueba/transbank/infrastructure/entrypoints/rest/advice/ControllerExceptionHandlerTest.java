@@ -76,4 +76,13 @@ public class ControllerExceptionHandlerTest {
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), apiError.getStatus());
         assertEquals(getMethodName(), apiError.getHandler());
     }
+
+    @Test
+    public void handleInvalidTokenValidations() {
+        ApiError apiError = controllerExceptionHandler.handleInvalidTokenValidations(new InvalidTokenException());
+
+        assertEquals(ErrorType.INVALID_TOKEN_ERROR.getDescription(), apiError.getError());
+        assertEquals(HttpStatus.UNAUTHORIZED.getReasonPhrase(), apiError.getStatus());
+        assertEquals(getMethodName(), apiError.getHandler());
+    }
 }
