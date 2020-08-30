@@ -2,6 +2,7 @@ package com.prueba.transbank.domain.usecase;
 
 import com.prueba.transbank.domain.entities.error.LoginErrorException;
 import com.prueba.transbank.domain.entities.user.User;
+import com.prueba.transbank.domain.usecase.port.AlgorithmEncryptPasswordDataProvide;
 import com.prueba.transbank.domain.usecase.port.VerifyLoginUserDataProvide;
 import com.prueba.transbank.fixture.UserFixture;
 import org.junit.Before;
@@ -26,9 +27,12 @@ public class LoginUserTest {
     @Mock
     VerifyLoginUserDataProvide verifyLoginUserDataProvide;
 
+    @Mock
+    AlgorithmEncryptPasswordDataProvide algorithmEncryptPasswordDataProvide;
+
     @Before
     public void init(){
-        loginUser = new LoginUser(verifyLoginUserDataProvide);
+        loginUser = new LoginUser(verifyLoginUserDataProvide, algorithmEncryptPasswordDataProvide);
         user =  UserFixture.create()
                 .withName(NAME)
                 .withPassword(PASS)
@@ -38,6 +42,7 @@ public class LoginUserTest {
     @Test
     public void  verifyLoginSuccess(){
 
+        when(algorithmEncryptPasswordDataProvide.generateSecurePassword( any(String.class))).thenReturn("eedas");
         when( verifyLoginUserDataProvide.loginUser(any(String.class),any(String.class))).thenReturn(true);
 
         assertTrue(loginUser.login(user));
@@ -46,7 +51,7 @@ public class LoginUserTest {
 
     @Test(expected = LoginErrorException.class)
     public void  verifyLoginError(){
-
+        when(algorithmEncryptPasswordDataProvide.generateSecurePassword( any(String.class))).thenReturn("eedas");
         when( verifyLoginUserDataProvide.loginUser(any(String.class),any(String.class))).thenReturn(false);
 
         loginUser.login(user);
