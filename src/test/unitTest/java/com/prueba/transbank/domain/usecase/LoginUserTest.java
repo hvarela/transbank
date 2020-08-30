@@ -1,17 +1,16 @@
 package com.prueba.transbank.domain.usecase;
 
+import com.prueba.transbank.domain.entities.error.LoginErrorException;
 import com.prueba.transbank.domain.entities.user.User;
 import com.prueba.transbank.domain.usecase.port.VerifyLoginUserDataProvide;
 import com.prueba.transbank.fixture.UserFixture;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -44,7 +43,7 @@ public class LoginUserTest {
     }
 
 
-    @Test
+    @Test(expected = LoginErrorException.class)
     public void  verifyLoginError(){
         User user = UserFixture.create()
                 .withName(NAME)
@@ -53,7 +52,7 @@ public class LoginUserTest {
 
         when( verifyLoginUserDataProvide.loginUser(any(User.class))).thenReturn(false);
 
-        assertFalse(loginUser.login(user));
+        loginUser.login(user);
     }
 
 }

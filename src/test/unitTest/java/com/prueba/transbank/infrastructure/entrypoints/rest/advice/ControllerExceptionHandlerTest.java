@@ -42,6 +42,15 @@ public class ControllerExceptionHandlerTest {
     }
 
     @Test
+    public void handleLogginErrorValidations() {
+        ApiError apiError = controllerExceptionHandler.handleLogginErrorValidations(new LoginErrorException());
+
+        assertEquals(ErrorType.LOGGIN_ERROR.getDescription(), apiError.getError());
+        assertEquals(HttpStatus.UNAUTHORIZED.getReasonPhrase(), apiError.getStatus());
+        assertEquals(getMethodName(), apiError.getHandler());
+    }
+
+    @Test
     public void handleRequestLoginPasswordValidations() {
         ApiError apiError = controllerExceptionHandler.handleRequestLoginPasswordValidations(new InvalidPasswordException());
 
