@@ -2,6 +2,7 @@ package com.prueba.transbank.domain.usecase.port;
 
 public interface JwtTokenDataProvider {
 
-    String genereteToken(String key, int ttl);
+    String generateToken(String user, int ttl);
     boolean isValidToken(String token);
+
 }

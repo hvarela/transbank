@@ -13,7 +13,7 @@ import static junit.framework.TestCase.assertTrue;
 @TestPropertySource(locations = "classpath:secrets/secret.properties")
 public class AlgorithmEncryptPasswordTest {
 
-    AlgorithmEncryptPassword algorithmEncryptPassword;
+    private AlgorithmEncryptPassword algorithmEncryptPassword;
 
     @Value("${algorithmEncryptpassword.salt}")
     private String salt;

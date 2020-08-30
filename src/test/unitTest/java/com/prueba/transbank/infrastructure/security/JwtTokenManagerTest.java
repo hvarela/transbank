@@ -1,15 +1,17 @@
 package com.prueba.transbank.infrastructure.security;
 
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.prueba.transbank.domain.entities.error.InvalidTokenException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(JUnit4.class)
 public class JwtTokenManagerTest {
@@ -28,29 +30,32 @@ public class JwtTokenManagerTest {
     @Test
     public void genereteToken()  {
 
-        String token = jwtTokenManager.genereteToken("tito1234", 20);
+        String token = jwtTokenManager.generateToken("tito1234", 20);
 
-        assertEquals(JWT.decode(token), "tito1234");
+        DecodedJWT decode = JWT.decode(token);
+
+        assertEquals("tito1234",  decode.getClaim("user").asString());
+        assertEquals("transbank",  decode.getIssuer());
 
     }
 
     @Test
     public void veryfyIfTokenIsValid()  {
 
-        String token = jwtTokenManager.genereteToken("tito1234", 20);
+        String token = jwtTokenManager.generateToken("tito1234", 20);
 
         assertTrue(jwtTokenManager.isValidToken(token));
 
     }
 
-    @Test
-    public void veryfyIfExpireToken() throws NoSuchAlgorithmException, InterruptedException {
+    @Test(expected = InvalidTokenException.class)
+    public void veryfyIfExpireToken() throws InterruptedException {
 
-        String token = jwtTokenManager.genereteToken("tito1234", 1);
+        String token = jwtTokenManager.generateToken("tito1234", 1);
 
-        TimeUnit.SECONDS.sleep(3);
+        TimeUnit.SECONDS.sleep(2);
 
-        assertFalse(jwtTokenManager.isValidToken(token));
+        jwtTokenManager.isValidToken(token);
 
     }
 }
