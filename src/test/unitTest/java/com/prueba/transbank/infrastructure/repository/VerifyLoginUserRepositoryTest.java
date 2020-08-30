@@ -53,7 +53,7 @@ public class VerifyLoginUserRepositoryTest {
 
         when( usersRepository.findByNamePassword(any(String.class), any(String.class) ) ).thenReturn( Optional.of(userEntity));
 
-        assertTrue( verifyLoginUserRepository.loginUser(user) );
+        assertTrue( verifyLoginUserRepository.loginUser(user.getName(), user.getPassword()) );
 
     }
 
@@ -63,7 +63,7 @@ public class VerifyLoginUserRepositoryTest {
 
         when( usersRepository.findByNamePassword(any(String.class), any(String.class) ) ).thenReturn( Optional.empty());
 
-        assertFalse( verifyLoginUserRepository.loginUser(user) );
+        assertFalse( verifyLoginUserRepository.loginUser(user.getName(), user.getPassword()) );
 
     }
 
