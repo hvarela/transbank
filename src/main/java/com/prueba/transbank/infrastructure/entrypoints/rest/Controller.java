@@ -2,10 +2,12 @@ package com.prueba.transbank.infrastructure.entrypoints.rest;
 
 
 import com.prueba.transbank.domain.entities.user.User;
-import com.prueba.transbank.infrastructure.entrypoints.rest.translator.UserRequestTranslator;
+import com.prueba.transbank.domain.usecase.LoginUser;
 import com.prueba.transbank.infrastructure.entrypoints.rest.request.UserRequest;
+import com.prueba.transbank.infrastructure.entrypoints.rest.translator.UserRequestTranslator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,12 @@ public class Controller {
 
     private Logger logger = LoggerFactory.getLogger(Controller.class);
 
+    private LoginUser loginUser;
+
+    @Autowired
+    Controller(LoginUser loginUser){
+        this.loginUser = loginUser;
+    }
 
     @RequestMapping(
             value= "/login",
@@ -31,7 +39,10 @@ public class Controller {
 
         User user = UserRequestTranslator.translate(userRequest);
 
+        loginUser.login(user);
+
         return  new ResponseEntity<>("", HttpStatus.NO_CONTENT);
+
     }
 
     @RequestMapping(

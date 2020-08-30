@@ -27,8 +27,12 @@ public class ControllerExceptionHandler {
         return new ApiError(HttpStatus.BAD_REQUEST.getReasonPhrase(), "handleRequestLoginPasswordValidations", e.getMessage());
     }
 
+
+    @ExceptionHandler(LoginErrorException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ApiError handleLoginErrorValidations(LoginErrorException e) {
-        return null;
+        logger.error("usuario no encontrado en la BD");
+        return new ApiError(HttpStatus.UNAUTHORIZED.getReasonPhrase(), "handleLoginErrorValidations", e.getMessage());
     }
 
     @ExceptionHandler(InternalErrorException.class)
