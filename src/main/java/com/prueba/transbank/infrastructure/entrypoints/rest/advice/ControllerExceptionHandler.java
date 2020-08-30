@@ -1,9 +1,6 @@
 package com.prueba.transbank.infrastructure.entrypoints.rest.advice;
 
-import com.prueba.transbank.domain.entities.error.ApiError;
-import com.prueba.transbank.domain.entities.error.InternalErrorException;
-import com.prueba.transbank.domain.entities.error.InvalidNameException;
-import com.prueba.transbank.domain.entities.error.InvalidPasswordException;
+import com.prueba.transbank.domain.entities.error.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -30,6 +27,10 @@ public class ControllerExceptionHandler {
         return new ApiError(HttpStatus.BAD_REQUEST.getReasonPhrase(), "handleRequestLoginPasswordValidations", e.getMessage());
     }
 
+    public ApiError handleLoginErrorValidations(LoginErrorException e) {
+        return null;
+    }
+
     @ExceptionHandler(InternalErrorException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ApiError handleInternalErrorValidations(InternalErrorException e) {
@@ -43,5 +44,7 @@ public class ControllerExceptionHandler {
         logger.error("exception inesperada ",e);
         return new ApiError(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), "handleRuntimeValidations", e.getMessage());
     }
+
+
 
 }

@@ -42,8 +42,8 @@ public class ControllerExceptionHandlerTest {
     }
 
     @Test
-    public void handleLogginErrorValidations() {
-        ApiError apiError = controllerExceptionHandler.handleLogginErrorValidations(new LoginErrorException());
+    public void handleLoginErrorValidations() {
+        ApiError apiError = controllerExceptionHandler.handleLoginErrorValidations(new LoginErrorException());
 
         assertEquals(ErrorType.LOGGIN_ERROR.getDescription(), apiError.getError());
         assertEquals(HttpStatus.UNAUTHORIZED.getReasonPhrase(), apiError.getStatus());
