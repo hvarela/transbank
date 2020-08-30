@@ -4,7 +4,6 @@ import com.prueba.transbank.domain.usecase.port.AlgorithmEncryptPasswordDataProv
 import com.prueba.transbank.infrastructure.repository.VerifyLoginUserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
@@ -20,8 +19,8 @@ public class AlgorithmEncryptPassword implements AlgorithmEncryptPasswordDataPro
 
     private Logger logger = LoggerFactory.getLogger(AlgorithmEncryptPassword.class);
 
-    @Value("${algorithmencryptpassword.salt}")
-    private String  SALT;
+
+    private static final String  SALT="pruebaTL";
     private static final int KEY_LENGTH = 512;
     private static final int ITERATIONS = 10000;
 
