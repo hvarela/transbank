@@ -4,16 +4,17 @@ import com.prueba.transbank.domain.usecase.port.JwtTokenDataProvider;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JwtToken implements JwtTokenDataProvider {
+public class JwtTokenManager implements JwtTokenDataProvider {
 
-    private JwtKeyManager jwtKeyManager;
+    private AlgorithmKeyManager algorithmKeyManager;
 
-    public JwtToken( JwtKeyManager jwtKeyManager){
-        this.jwtKeyManager = jwtKeyManager;
+    public JwtTokenManager(AlgorithmKeyManager algorithmKeyManager){
+        this.algorithmKeyManager = algorithmKeyManager;
     }
 
     @Override
     public String genereteToken(String key, int ttl) {
+
         return null;
     }
 

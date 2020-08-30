@@ -14,31 +14,23 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @TestPropertySource(locations = "classpath:secrets/secret.properties")
-public class JwtKeyManagerTest {
+public class AlgorithmKeyManagerTest {
 
-    private JwtKeyManager jwtKeyManager;
+    private AlgorithmKeyManager algorithmKeyManager;
 
     @Value("${jwt.keys.hmac}")
     private String hma;
 
     @Before
     public void init(){
-        jwtKeyManager = new JwtKeyManager(hma);
+        algorithmKeyManager = new AlgorithmKeyManager(hma);
     }
 
     @Test
     public void veryfiAlgorithm(){
-        assertEquals("HS512", jwtKeyManager.getAlgorithm().getName());
+
+        assertEquals("HS512", algorithmKeyManager.getAlgorithm().getName());
     }
 
-    @Test
-    public void veryfiGeneratedDistincToken() throws NoSuchAlgorithmException {
 
-        String key1 = jwtKeyManager.generateHMAC512Key();
-        String key2= jwtKeyManager.generateHMAC512Key();
-
-        assertTrue( key1.length()>100);
-        assertTrue( key2.length()>100);
-        assertNotEquals(key1, key2);
-    }
 }
