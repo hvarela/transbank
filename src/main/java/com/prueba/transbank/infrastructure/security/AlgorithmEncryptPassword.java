@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+import javax.validation.Valid;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
@@ -21,9 +22,14 @@ public class AlgorithmEncryptPassword implements AlgorithmEncryptPasswordDataPro
     private Logger logger = LoggerFactory.getLogger(AlgorithmEncryptPassword.class);
 
 
-    private static final String  SALT="pruebaTL";
-    private static final int KEY_LENGTH = 512;
-    private static final int ITERATIONS = 10000;
+    @Value("${algorithmEncryptpassword.salt}")
+    private  String  SALT;
+    @Value("${algorithmEncryptpassword.keylength}")
+    private  int KEY_LENGTH;
+    @Value("${algorithmEncryptpassword.iterations}")
+    private  int ITERATIONS;
+    @Value("${algorithmEncryptpassword.algorithm}")
+    private String ALGORITHM;
 
     public AlgorithmEncryptPassword(){}
 
@@ -31,7 +37,7 @@ public class AlgorithmEncryptPassword implements AlgorithmEncryptPasswordDataPro
         PBEKeySpec spec = new PBEKeySpec(password,  SALT.getBytes(), ITERATIONS, KEY_LENGTH);
         Arrays.fill(password, Character.MIN_VALUE);
         try {
-            SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
+            SecretKeyFactory skf = SecretKeyFactory.getInstance(ALGORITHM);
             return skf.generateSecret(spec).getEncoded();
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             throw new AssertionError("Error while hashing a password: " + e.getMessage(), e);
