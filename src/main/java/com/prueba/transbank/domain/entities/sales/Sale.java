@@ -4,20 +4,27 @@ import com.prueba.transbank.domain.entities.error.SaleDataErrorException;
 
 public class Sale {
 
+    private int id;
     private int producId;
     private String name;
     private double price;
     private int amount;
 
 
-    public Sale(int producId, String name, double price, int amount) {
+    public Sale(int id,int producId, String name, double price, int amount){
+        this.id = id;
         this.producId = producId;
         this.name = name;
         this.price = price;
         this.amount = amount;
-
         validate();
+    }
+    public Sale(int producId, String name, double price, int amount) {
+         this(1,producId,name,price,amount);
+    }
 
+    public int getId(){
+        return this.id;
     }
 
     public int getProducId() {

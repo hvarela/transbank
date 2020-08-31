@@ -1,7 +1,7 @@
 package com.prueba.transbank.infrastructure.entrypoints.rest;
 
 
-import com.prueba.transbank.domain.entities.sales.Sale;
+
 import com.prueba.transbank.domain.entities.user.User;
 import com.prueba.transbank.domain.usecase.GetProductsSolds;
 import com.prueba.transbank.domain.usecase.LoginUser;
@@ -12,7 +12,10 @@ import com.prueba.transbank.infrastructure.entrypoints.rest.request.SaleRequest;
 import com.prueba.transbank.infrastructure.entrypoints.rest.request.SaleResponse;
 import com.prueba.transbank.infrastructure.entrypoints.translator.SaleTranslator;
 import com.prueba.transbank.infrastructure.entrypoints.translator.UserRequestTranslator;
-import io.swagger.annotations.*;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +26,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import springfox.documentation.annotations.ApiIgnore;
-import sun.invoke.empty.Empty;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -88,14 +90,12 @@ public class Controller {
             @ApiResponse(code = 500, message = "Service Error"),
     })
     public  ResponseEntity<SaleResponse> addSales(@RequestBody SaleRequest saleRequest){
-
-        Sale sale = SaleTranslator.translate(saleRequest);
-
-        int id = salesRecords.saleRecord(sale);
+         int id = salesRecords.saleRecord(SaleTranslator.translate(saleRequest));
 
         logger.info("agrega venta");
 
-        return  new ResponseEntity<SaleResponse>(SaleTranslator.translate(sale, id) , HttpStatus.CREATED);
+
+        return  new ResponseEntity<SaleResponse>(SaleTranslator.translate( SaleTranslator.translate(saleRequest), id) , HttpStatus.CREATED);
     }
 
 
@@ -108,24 +108,26 @@ public class Controller {
     @ApiOperation(value = "Retorna una lista de productos vendidos ",
             produces = "application/json")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "retorna lista de productos vendidos",  response = Sale.class, responseContainer="List"),
-            @ApiResponse(code = 204, message = "no hay productos vendidos", response = Empty.class, responseContainer="Void"),
+            @ApiResponse(code = 200, message = "retorna lista de productos vendidos",  response = SaleResponse.class, responseContainer="List"),
             @ApiResponse(code = 401, message = "usuario no autorizado"),
             @ApiResponse(code = 500, message = "Service Error"),
     })
-    public ResponseEntity<List<Sale>> getSales(){
+    public ResponseEntity<List<SaleResponse>> getSales(){
 
         logger.info("obtiene  ventas del dia");
 
-        List<Sale> allSales = getProductsSolds.getAllSales();
+        List<SaleResponse> allSales= new ArrayList<>();
+
+        getProductsSolds.getAllSales().stream().forEach((sale) ->{
+            allSales.add(  SaleTranslator.translate(sale));
+        });
+
+
 
         logger.info( String.format("cantidad ventas [%d]", allSales.size()));
 
-        if( allSales.isEmpty()){
-            return new ResponseEntity<List<Sale>>(allSales, HttpStatus.NO_CONTENT);
-        }else {
-            return new ResponseEntity<List<Sale>>(allSales, HttpStatus.OK);
-        }
+        return new ResponseEntity<List<SaleResponse>>(allSales, HttpStatus.OK);
+
     }
 
 

@@ -13,4 +13,9 @@ public class SaleTranslator {
         return  new SaleResponse(id, sale.getProducId(), sale.getName(), sale.getPrice(), sale.getAmount());
 
     }
+
+    public  static SaleResponse translate(Sale sale){
+        return  new SaleResponse(sale.getId(), sale.getProducId(), sale.getName(), sale.getPrice(), sale.getAmount());
+
+    }
 }

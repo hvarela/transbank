@@ -6,6 +6,6 @@ import com.prueba.transbank.infrastructure.entitys.SalesEntity;
 public class SalesEntityTranslater {
 
     public static Sale translate(SalesEntity salesEntity){
-        return new Sale(salesEntity.getProducId(), salesEntity.getName(), salesEntity.getPrice(),salesEntity.getAmount() );
+        return new Sale(salesEntity.getId(), salesEntity.getProducId(), salesEntity.getName(), salesEntity.getPrice(),salesEntity.getAmount() );
     }
 }

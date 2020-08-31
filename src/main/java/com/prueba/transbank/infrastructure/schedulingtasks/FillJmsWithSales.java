@@ -31,7 +31,7 @@ public class FillJmsWithSales {
     }
 
 
-    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRate = 5000, initialDelay =  5000)
     public void reportCurrentTime() {
         if( this.cant++ > 20)
             return;

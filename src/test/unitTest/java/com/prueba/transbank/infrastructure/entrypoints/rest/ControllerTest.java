@@ -82,7 +82,7 @@ public class ControllerTest {
         ResponseEntity<SaleResponse> responseEntity = controller.addSales(saleRequest);
 
 
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
         assertEquals(saleRequest.getName(), responseEntity.getBody().getName());
         assertEquals(saleRequest.getAmount(), responseEntity.getBody().getAmount());
         assertTrue( Double.compare(saleRequest.getPrice(), responseEntity.getBody().getPrice()) ==0);
@@ -95,10 +95,10 @@ public class ControllerTest {
     public void sholdReturnEmpyListWhenCallGetProductSolds(){
         when( getProductsSolds.getAllSales()).thenReturn( new ArrayList<Sale>());
 
-        ResponseEntity<List<Sale>> responseEntity = controller.getSales();
+        ResponseEntity<List<SaleResponse>> responseEntity = controller.getSales();
 
 
-        assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
        assertTrue(responseEntity.getBody().isEmpty() );
     }
 
@@ -109,7 +109,7 @@ public class ControllerTest {
 
         when( getProductsSolds.getAllSales()).thenReturn(saleList);
 
-        ResponseEntity<List<Sale>> responseEntity = controller.getSales();
+        ResponseEntity<List<SaleResponse>> responseEntity = controller.getSales();
 
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
