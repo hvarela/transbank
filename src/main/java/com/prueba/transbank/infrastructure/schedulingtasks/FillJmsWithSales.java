@@ -20,16 +20,21 @@ public class FillJmsWithSales {
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
     private JmsTemplate jmsTemplate;
 
+    private int cant;
+
     private Random random;
 
     public FillJmsWithSales(JmsTemplate jmsTemplate){
         this.jmsTemplate = jmsTemplate;
         this.random = new Random();
+        this.cant = 0;
     }
 
 
     @Scheduled(fixedRate = 5000)
     public void reportCurrentTime() {
+        if( this.cant++ > 20)
+            return;
         log.info("The time is now {}", dateFormat.format(new Date()));
         jmsTemplate.convertAndSend("salesChannels", new SalesEntity(random.nextInt(100)+1, random.nextInt(1000)+1,"casa", random.nextDouble()+1 ,random.nextInt(10) +1 ));
     }
