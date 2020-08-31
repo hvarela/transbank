@@ -71,4 +71,14 @@ public class Sale {
         }
 
     }
+
+    @Override
+    public String toString() {
+        return "Sale{" +
+                "producId=" + producId +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", amount=" + amount +
+                '}';
+    }
 }

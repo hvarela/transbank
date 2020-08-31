@@ -30,7 +30,12 @@ public class SalesRecordsTest {
 
     @Test
     public void shouldRecordSaleSuccessfully(){
-        Sale sale = SaleFixture.create().build();
+        Sale sale = SaleFixture.create()
+                .withName("papas")
+                .withAmount(2)
+                .withPrice(4.8)
+                .withProductId(2313)
+                .build();
 
         when( salesRecordsDataProvider.saveSales(any(Sale.class))).thenReturn(31);
 

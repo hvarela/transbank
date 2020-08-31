@@ -16,6 +16,10 @@ public class SalesRecords {
     }
 
     public int saleRecord(Sale sale){
-        return 0;
+
+        int id = salesRecordsDataProvider.saveSales(sale);
+        logger.info( String.format("se guarda la venta con id [%d]  %s",id,sale.toString()));
+
+        return id;
     }
 }
