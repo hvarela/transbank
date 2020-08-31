@@ -1,4 +1,4 @@
-package com.prueba.transbank.infrastructure.entrypoints.rest.translator;
+package com.prueba.transbank.infrastructure.entrypoints.translator;
 
 import com.prueba.transbank.domain.entities.user.User;
 import com.prueba.transbank.infrastructure.entrypoints.rest.request.LoginRequest;

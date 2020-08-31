@@ -3,6 +3,7 @@ package com.prueba.transbank.infrastructure.entrypoints.rest.translator;
 import com.prueba.transbank.domain.entities.user.User;
 import com.prueba.transbank.fixture.UserRequestFixture;
 import com.prueba.transbank.infrastructure.entrypoints.rest.request.LoginRequest;
+import com.prueba.transbank.infrastructure.entrypoints.translator.UserRequestTranslator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;

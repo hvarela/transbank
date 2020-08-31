@@ -1,16 +1,17 @@
 package com.prueba.transbank.infrastructure.entrypoints.rest;
 
 
-import com.prueba.transbank.domain.entities.user.User;
 import com.prueba.transbank.domain.entities.sales.Sale;
+import com.prueba.transbank.domain.entities.user.User;
+import com.prueba.transbank.domain.usecase.GetProductsSolds;
 import com.prueba.transbank.domain.usecase.LoginUser;
 import com.prueba.transbank.domain.usecase.SalesRecords;
 import com.prueba.transbank.infrastructure.entrypoints.rest.request.LoginRequest;
 import com.prueba.transbank.infrastructure.entrypoints.rest.request.LoginResponse;
 import com.prueba.transbank.infrastructure.entrypoints.rest.request.SaleRequest;
 import com.prueba.transbank.infrastructure.entrypoints.rest.request.SaleResponse;
-import com.prueba.transbank.infrastructure.entrypoints.rest.translator.SaleTranslator;
-import com.prueba.transbank.infrastructure.entrypoints.rest.translator.UserRequestTranslator;
+import com.prueba.transbank.infrastructure.entrypoints.translator.SaleTranslator;
+import com.prueba.transbank.infrastructure.entrypoints.translator.UserRequestTranslator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/restaurant")
 public class Controller {
@@ -30,11 +33,14 @@ public class Controller {
 
     private LoginUser loginUser;
     private SalesRecords salesRecords;
+    private GetProductsSolds getProductsSolds;
+
 
     @Autowired
-    public Controller(LoginUser loginUser, SalesRecords salesRecords) {
+    public Controller(LoginUser loginUser, SalesRecords salesRecords, GetProductsSolds getProductsSolds) {
         this.loginUser = loginUser;
         this.salesRecords = salesRecords;
+        this.getProductsSolds = getProductsSolds;
     }
 
     @RequestMapping(
@@ -73,8 +79,19 @@ public class Controller {
             value= "/sales",
             method = RequestMethod.GET
     )
-    public void getSales(){
+    public ResponseEntity<List<Sale>> getSales(){
+
         logger.info("obtiene  ventas del dia");
+
+        List<Sale> allSales = getProductsSolds.getAllSales();
+
+        logger.info( String.format("cantidad ventas [%d]", allSales.size()));
+
+        if( allSales.isEmpty()){
+            return new ResponseEntity<List<Sale>>(allSales, HttpStatus.NO_CONTENT);
+        }else {
+            return new ResponseEntity<List<Sale>>(allSales, HttpStatus.OK);
+        }
     }
 
 }

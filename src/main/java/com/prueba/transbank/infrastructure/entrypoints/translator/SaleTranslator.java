@@ -1,4 +1,4 @@
-package com.prueba.transbank.infrastructure.entrypoints.rest.translator;
+package com.prueba.transbank.infrastructure.entrypoints.translator;
 
 import com.prueba.transbank.domain.entities.sales.Sale;
 import com.prueba.transbank.infrastructure.entrypoints.rest.request.SaleRequest;

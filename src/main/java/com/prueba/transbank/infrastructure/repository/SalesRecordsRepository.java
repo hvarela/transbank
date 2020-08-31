@@ -23,7 +23,7 @@ public class SalesRecordsRepository implements SalesRecordsDataProvider {
     @Override
     public int saveSales(Sale sale) {
 
-        SalesEntity salesEntity = new SalesEntity(sale.getProducId(), sale.getName(),sale.getPrice(),sale.getAmount());
+        SalesEntity salesEntity = new SalesEntity(0, sale.getProducId(), sale.getName(),sale.getPrice(),sale.getAmount());
 
         salesEntity =  salesRepository.save(salesEntity);
 

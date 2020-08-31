@@ -40,7 +40,8 @@ public class SalesEntity implements Serializable {
         this.id = id;
     }
 
-    public SalesEntity(Integer productId, String name, Double price, Integer amount) {
+    public SalesEntity(int id ,Integer productId, String name, Double price, Integer amount) {
+        this.id = id;
         this.producId = productId;
         this.name = name;
         this.price = price;

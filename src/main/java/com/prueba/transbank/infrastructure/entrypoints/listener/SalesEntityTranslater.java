@@ -1,4 +1,4 @@
-package com.prueba.transbank.infrastructure.entrypoints.listener.translator;
+package com.prueba.transbank.infrastructure.entrypoints.listener;
 
 import com.prueba.transbank.domain.entities.sales.Sale;
 import com.prueba.transbank.infrastructure.entitys.SalesEntity;

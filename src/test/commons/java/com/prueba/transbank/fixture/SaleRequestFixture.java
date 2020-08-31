@@ -1,11 +1,11 @@
 package com.prueba.transbank.fixture;
 
 
-import com.prueba.transbank.domain.entities.sales.Sale;
+import com.prueba.transbank.infrastructure.entrypoints.rest.request.SaleRequest;
 
-public class SaleRequestFixture extends AbstractFixture<Sale> {
+public class SaleRequestFixture extends AbstractFixture<SaleRequest> {
 
-    private static final  String  DEFAULT_NAME= "";
+    private static final  String  DEFAULT_NAME= "Casa";
     private static final  int  DEFAULT_PRODUC_ID= 123;
     private static final  int  DEFAULT_AMOUNT= 1;
     private static final  double  DEFAULT_PRICE= 1.0;
@@ -47,7 +47,7 @@ public class SaleRequestFixture extends AbstractFixture<Sale> {
         return this;
     }
 
-    public Sale build() {
-        return new Sale(this.productId, this.name,  this.price, this.amount);
+    public SaleRequest build() {
+        return new SaleRequest(this.productId, this.name,  this.price, this.amount);
     }
 }
