@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 public class LoginUser {
 
     private Logger logger = LoggerFactory.getLogger(LoginUser.class);
+
     private VerifyLoginUserDataProvide verifyLoginUserDataProvide;
     private AlgorithmEncryptPasswordDataProvide algorithmEncryptPasswordDataProvide;
     private JwtTokenDataProvider jwtTokenDataProvider;

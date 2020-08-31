@@ -14,7 +14,7 @@ public class UserEntityFixture extends AbstractFixture<UserEntity> {
     private String name;
     private String password;
 
-    public UserEntityFixture(int id, String name, String password){
+    private UserEntityFixture(int id, String name, String password){
         this.id = id;
         this.name = name;
         this.password = password;

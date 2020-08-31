@@ -11,7 +11,7 @@ public class UserFixture extends AbstractFixture<User> {
     private String name;
     private String password;
 
-    public UserFixture(String name, String password){
+    private UserFixture(String name, String password){
         this.name = name;
         this.password = password;
     }

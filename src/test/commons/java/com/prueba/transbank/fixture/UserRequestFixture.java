@@ -11,7 +11,7 @@ public class UserRequestFixture extends AbstractFixture<LoginRequest> {
     private String name;
     private String password;
 
-    public UserRequestFixture(String name, String password){
+    private UserRequestFixture(String name, String password){
         this.name = name;
         this.password = password;
     }
