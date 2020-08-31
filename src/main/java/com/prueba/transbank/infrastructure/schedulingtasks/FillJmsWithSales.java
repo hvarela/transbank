@@ -31,7 +31,7 @@ public class FillJmsWithSales {
     @Scheduled(fixedRate = 5000)
     public void reportCurrentTime() {
         log.info("The time is now {}", dateFormat.format(new Date()));
-        jmsTemplate.convertAndSend("salesChannels", new SalesEntity(random.nextInt(100), random.nextInt(1000),"casa", random.nextDouble() ,random.nextInt(10) ));
+        jmsTemplate.convertAndSend("salesChannels", new SalesEntity(random.nextInt(100)+1, random.nextInt(1000)+1,"casa", random.nextDouble()+1 ,random.nextInt(10) +1 ));
     }
 
 }
