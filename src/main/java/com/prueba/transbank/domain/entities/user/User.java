@@ -5,7 +5,7 @@ import com.prueba.transbank.domain.entities.error.InvalidPasswordException;
 
 import java.io.Serializable;
 
-public class User implements Serializable{
+public class User{
 
     private String name;
     private String password;
