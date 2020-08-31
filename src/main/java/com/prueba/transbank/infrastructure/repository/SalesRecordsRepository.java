@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class SalesRecordsRepository implements SalesRecordsDataProvider {
 
-    Logger logger = LoggerFactory.getLogger(SalesRecordsRepository.class);
+    private Logger logger = LoggerFactory.getLogger(SalesRecordsRepository.class);
 
     private SalesRepository salesRepository;
 
