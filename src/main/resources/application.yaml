@@ -6,6 +6,12 @@ server:
     context-path: /${name}/v1
 
 
+springfox:
+  documentation:
+    swagger:
+      v2:
+        path: "/doc"
+
 spring:
   application:
     name: ${name}
@@ -34,4 +40,4 @@ spring:
       hibernate.generate_statistics: true
 
 trackingDataFilter:
-  toExcludePath: /actuator/health , /login, /h2console
+  toValidaPath: /restaurant/sales

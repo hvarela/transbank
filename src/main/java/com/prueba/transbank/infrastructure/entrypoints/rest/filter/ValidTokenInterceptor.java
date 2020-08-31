@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 
@@ -30,8 +29,8 @@ public class ValidTokenInterceptor extends OncePerRequestFilter {
     private static  final String BEARER = "Bearer ";
     private static final Logger logger = LoggerFactory.getLogger(ValidTokenInterceptor.class);
 
-    @Value("#{T(java.util.Arrays).asList('${trackingDataFilter.toExcludePath:}')}")
-    private List<String> EXCLUDE_URL;
+    @Value("#{T(java.util.Arrays).asList('${trackingDataFilter.toValidaPath:}')}")
+    private List<String> VALIDA_URL;
 
     private JwtTokenManager jwtTokenManager;
 
@@ -45,8 +44,8 @@ public class ValidTokenInterceptor extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
-        if (checkRequestUrl(request.getRequestURI())) {
+        logger.debug("Validating  url");
+        if (!checkValidaTokenToRequestUrl(request.getRequestURI())) {
             filterChain.doFilter(request, response);
         } else {
             logger.debug("Validating  bearer token");
@@ -74,8 +73,8 @@ public class ValidTokenInterceptor extends OncePerRequestFilter {
     }
 
 
-    public boolean checkRequestUrl(String requestUrl) {
-        return EXCLUDE_URL.stream().anyMatch(entry -> requestUrl.contains(entry));
+    public boolean checkValidaTokenToRequestUrl(String requestUrl) {
+        return VALIDA_URL.stream().anyMatch(entry -> requestUrl.contains(entry));
     }
 
 }
