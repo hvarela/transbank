@@ -7,8 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.*;
 
 @RunWith(JUnit4.class)
 public class SaleTest {
@@ -66,6 +65,23 @@ public class SaleTest {
         assertEquals(expectedMessage,actualMessage);
     }
 
+    @Test( expected =  SaleDataErrorException.class)
+    public void shouldCreateSaleSuccess() {
+
+
+        sale = SaleFixture.create()
+                .withAmount(21)
+                .withName("rosas")
+                .withProductId(34)
+                .withPrice(31).build();
+
+        assertEquals("rosa", sale.getName());
+        assertEquals(21, sale.getAmount());
+        assertEquals(34, sale.getProducId());
+        assertTrue(Double.compare(31, sale.getPrice())==0);
+
+    }
+
     @Test
     public void shouldThrowExeption4Amount(){
 
@@ -81,6 +97,21 @@ public class SaleTest {
         String actualMessage = exception.getMessage();
 
         assertEquals(expectedMessage,actualMessage);
+    }
+
+
+    @Test
+    public void shouldPrintSaleWithCallMethodToString(){
+
+       sale = SaleFixture.create()
+                    .withAmount(9)
+                    .withName("rosas")
+                    .withProductId(34)
+                    .withPrice(31).build();
+
+        String s = sale.toString();
+
+        assertTrue( s.contains("name='rosas'"));
     }
 
 }
