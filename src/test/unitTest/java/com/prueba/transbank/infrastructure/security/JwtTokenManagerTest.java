@@ -2,7 +2,7 @@ package com.prueba.transbank.infrastructure.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.prueba.transbank.domain.entities.error.InvalidTokenException;
+import com.prueba.transbank.domain.entities.error.TokenIsExpiredException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,15 +17,12 @@ import static org.junit.Assert.assertTrue;
 public class JwtTokenManagerTest {
 
     private JwtTokenManager jwtTokenManager;
-    private String key;
-    private AlgorithmKeyManager algorithmKeyManager;
     private static final String ISSUER ="test";
 
     @Before
     public  void init(){
-        key="12345";
-        algorithmKeyManager = new AlgorithmKeyManager("12312312313dsadafddsaqd");
-        jwtTokenManager = new JwtTokenManager(algorithmKeyManager, 2, ISSUER);
+        AlgorithmKeyManager algorithmKeyManager = new AlgorithmKeyManager("12312312313dsadafddsaqd");
+        jwtTokenManager = new JwtTokenManager(algorithmKeyManager, 1, ISSUER);
     }
 
     @Test
@@ -49,12 +46,12 @@ public class JwtTokenManagerTest {
 
     }
 
-    @Test(expected = InvalidTokenException.class)
+    @Test(expected = TokenIsExpiredException.class)
     public void veryfyIfExpireToken() throws InterruptedException {
 
         String token = jwtTokenManager.generateToken("tito1234");
 
-        TimeUnit.SECONDS.sleep(3);
+        TimeUnit.SECONDS.sleep(2);
 
         jwtTokenManager.isValidToken(token);
 

@@ -2,11 +2,13 @@ package com.prueba.transbank.domain.entities.error;
 
 public enum ErrorType {
 
-    UNEXPECTED_ERROR("FD00", "unexpected error"),
-    INVALID_NAME("FD01", "name  is null or empty"),
-    INVALID_PASSWORD("FD02", "password is null or empty"),
-    LOGGIN_ERROR("FD03", "user not found in the DB"),
-    INVALID_TOKEN_ERROR("FD04", "token is invalid");
+    UNEXPECTED_ERROR("FD00", "Unexpected error"),
+    INVALID_NAME("FD01", "Name  is null or empty"),
+    INVALID_PASSWORD("FD02", "Password is null or empty"),
+    LOGGIN_ERROR("FD03", "User not found in the DB"),
+    INVALID_TOKEN_ERROR("FD04", "Token is invalid"),
+    REQ_WITHOUT_TOKEN("FD05", "Request without Autorization Bearer token"),
+    TOKEN_EXPIRED_ERROR("FD04", "Token Expired");
 
     private final String code;
     private final String description;

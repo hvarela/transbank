@@ -42,8 +42,6 @@ public class ControllerExceptionHandler {
         return new ApiError(HttpStatus.UNAUTHORIZED.getReasonPhrase(), "handleInvalidTokenValidations", e.getMessage());
     }
 
-
-
     @ExceptionHandler(InternalErrorException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ApiError handleInternalErrorValidations(InternalErrorException e) {
@@ -58,6 +56,19 @@ public class ControllerExceptionHandler {
         return new ApiError(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(), "handleRuntimeValidations", e.getMessage());
     }
 
+    @ExceptionHandler(RequestWithoutTokenException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiError handleRQWithoutTokenValidations(RequestWithoutTokenException e) {
+        logger.error("request sin Bearer token",e);
+        return new ApiError(HttpStatus.BAD_REQUEST.getReasonPhrase(), "handleRQWithoutTokenValidations", e.getMessage());
+    }
+
+    @ExceptionHandler(TokenIsExpiredException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ApiError handleTokenIsExpiredValidations(TokenIsExpiredException e) {
+        logger.error(e.getMessage());
+        return new ApiError(HttpStatus.UNAUTHORIZED.getReasonPhrase(), "handleTokenIsExpiredValidations", e.getMessage());
+    }
 
 
 }

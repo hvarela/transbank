@@ -24,7 +24,7 @@ public class ErrorTypeTest {
     @Parameterized.Parameters(name = "{0}, {1}, {2}")
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
-                {ErrorType.UNEXPECTED_ERROR, "FD00", "unexpected error"}
+                {ErrorType.UNEXPECTED_ERROR, "FD00", "Unexpected error"}
         });
     }
 

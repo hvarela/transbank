@@ -4,6 +4,7 @@ import com.prueba.transbank.domain.entities.user.User;
 import com.prueba.transbank.domain.usecase.LoginUser;
 import com.prueba.transbank.fixture.UserRequestFixture;
 import com.prueba.transbank.infrastructure.entrypoints.rest.request.LoginRequest;
+import com.prueba.transbank.infrastructure.entrypoints.rest.request.LoginResponse;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -46,8 +48,9 @@ public class ControllerTest {
 
         when( loginUser.login(any(User.class) ) ).thenReturn(token);
 
-        ResponseEntity<String> responseEntity = controller.loginUser(loginRequest);
+        ResponseEntity<LoginResponse> responseEntity = controller.loginUser(loginRequest);
 
-        assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertEquals(token, responseEntity.getBody().getToken());
     }
 }

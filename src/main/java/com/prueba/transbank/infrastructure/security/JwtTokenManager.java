@@ -2,12 +2,10 @@ package com.prueba.transbank.infrastructure.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
-import com.auth0.jwt.exceptions.AlgorithmMismatchException;
-import com.auth0.jwt.exceptions.InvalidClaimException;
-import com.auth0.jwt.exceptions.SignatureVerificationException;
-import com.auth0.jwt.exceptions.TokenExpiredException;
+import com.auth0.jwt.exceptions.*;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.prueba.transbank.domain.entities.error.InvalidTokenException;
+import com.prueba.transbank.domain.entities.error.TokenIsExpiredException;
 import com.prueba.transbank.domain.usecase.port.JwtTokenDataProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,9 +55,12 @@ public class JwtTokenManager implements JwtTokenDataProvider {
 
             DecodedJWT verify = jwtVerifier.verify(token);
 
-        } catch (AlgorithmMismatchException | SignatureVerificationException | InvalidClaimException | TokenExpiredException ex) {
+        } catch (AlgorithmMismatchException | JWTDecodeException |SignatureVerificationException | InvalidClaimException ex) {
             looger.error( String.format("invalid token : %s", ex.getMessage()));
             throw new InvalidTokenException();
+        }catch( TokenExpiredException ex){
+            looger.error( String.format("invalid token : %s", ex.getMessage()));
+            throw new TokenIsExpiredException(ex.getMessage());
         }
         return true;
     }
