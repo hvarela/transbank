@@ -2,7 +2,7 @@ package com.prueba.transbank.infrastructure.repository;
 
 import com.prueba.transbank.domain.entities.sales.Sale;
 import com.prueba.transbank.domain.usecase.port.GetProductsSoldsDataProvider;
-import com.prueba.transbank.infrastructure.entrypoints.translator.SoldsProductsListener;
+import com.prueba.transbank.infrastructure.entrypoints.listener.SoldsProductsListener;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

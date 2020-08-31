@@ -1,8 +1,8 @@
-package com.prueba.transbank.infrastructure.entrypoints.translator;
+package com.prueba.transbank.infrastructure.entrypoints.listener;
 
 import com.prueba.transbank.domain.entities.sales.Sale;
 import com.prueba.transbank.infrastructure.entitys.SalesEntity;
-import com.prueba.transbank.infrastructure.entrypoints.listener.SalesEntityTranslater;
+import com.prueba.transbank.infrastructure.entrypoints.translator.SalesEntityTranslater;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jms.annotation.JmsListener;
@@ -35,7 +35,6 @@ public class SoldsProductsListener {
     public List<Sale> getSaleList(){
        List<Sale >  sales =  saleList.stream()
                .collect( Collectors.toList());
-       saleList.removeAll(sales);
        return sales;
     }
 
