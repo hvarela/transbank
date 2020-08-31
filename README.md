@@ -77,6 +77,14 @@ Este devolvera un token que debe ser enviado en los otros endpoint como **Autori
 El token tiene un tiempo de vida que esta configurado en el archivo application.yaml. Si el token expira el usuario no podra utilizar los otros endpoint
 
 
+## Documentacion swager
+
+Una vez que el proyecto esta corriendo , se puede ver la documentacion de la api en esta url
+
+```
+http://localhost:8080/transbank/v1/swagger-ui.html
+```
+
 
 ## Postman
 
