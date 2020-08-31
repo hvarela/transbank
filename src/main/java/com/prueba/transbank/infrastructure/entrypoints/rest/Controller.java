@@ -12,6 +12,7 @@ import com.prueba.transbank.infrastructure.entrypoints.rest.request.SaleRequest;
 import com.prueba.transbank.infrastructure.entrypoints.rest.request.SaleResponse;
 import com.prueba.transbank.infrastructure.entrypoints.translator.SaleTranslator;
 import com.prueba.transbank.infrastructure.entrypoints.translator.UserRequestTranslator;
+import io.swagger.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
+import sun.invoke.empty.Empty;
 
 import java.util.List;
 
@@ -46,8 +49,18 @@ public class Controller {
     @RequestMapping(
             value= "/login",
             method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+
     )
+    @ApiOperation(value = "login de usuario. retorna un token para ser usado como autorization Bearer",
+            response = LoginResponse.class, produces = "application/json", consumes = "application/json")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK", response = LoginResponse.class),
+            @ApiResponse(code = 400, message = "Invalid params"),
+            @ApiResponse(code = 401, message = "usuario no autorizado"),
+            @ApiResponse(code = 500, message = "Service Error"),
+    })
     public ResponseEntity<LoginResponse> loginUser(@RequestBody LoginRequest loginRequest){
         logger.info( String.format("login  request [%s] pass[%s]", loginRequest.getName(), loginRequest.getPassword()) );
 
@@ -61,8 +74,19 @@ public class Controller {
 
     @RequestMapping(
             value= "/sales",
-            method = RequestMethod.POST
+            method = RequestMethod.POST,
+            consumes = "application/json",
+            produces = "application/json"
     )
+    @ApiImplicitParam(name = "Authorization", value = "Bearer Access Token", required = true, allowEmptyValue = false, paramType = "header", dataTypeClass = String.class, example = "Bearer {{token}}")
+    @ApiOperation(value = "agrega una venta , retornando el producto almacenado en BD",
+             produces = "application/json", consumes = "application/json")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Producto ingresado", response = SaleResponse.class),
+            @ApiResponse(code = 400, message = "Invalid paramater"),
+            @ApiResponse(code = 401, message = "usuario no autorizado"),
+            @ApiResponse(code = 500, message = "Service Error"),
+    })
     public  ResponseEntity<SaleResponse> addSales(@RequestBody SaleRequest saleRequest){
 
         Sale sale = SaleTranslator.translate(saleRequest);
@@ -71,14 +95,24 @@ public class Controller {
 
         logger.info("agrega venta");
 
-        return  new ResponseEntity<SaleResponse>(SaleTranslator.translate(sale, id) , HttpStatus.OK);
+        return  new ResponseEntity<SaleResponse>(SaleTranslator.translate(sale, id) , HttpStatus.CREATED);
     }
 
 
     @RequestMapping(
             value= "/sales",
-            method = RequestMethod.GET
+            method = RequestMethod.GET,
+            produces = "application/json"
     )
+    @ApiImplicitParam(name = "Authorization", value = "Bearer Access Token", required = true, allowEmptyValue = false, paramType = "header", dataTypeClass = String.class, example = "Bearer {{token}}")
+    @ApiOperation(value = "Retorna una lista de productos vendidos ",
+            produces = "application/json")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "retorna lista de productos vendidos",  response = Sale.class, responseContainer="List"),
+            @ApiResponse(code = 204, message = "no hay productos vendidos", response = Empty.class, responseContainer="Void"),
+            @ApiResponse(code = 401, message = "usuario no autorizado"),
+            @ApiResponse(code = 500, message = "Service Error"),
+    })
     public ResponseEntity<List<Sale>> getSales(){
 
         logger.info("obtiene  ventas del dia");
@@ -93,5 +127,7 @@ public class Controller {
             return new ResponseEntity<List<Sale>>(allSales, HttpStatus.OK);
         }
     }
+
+
 
 }
