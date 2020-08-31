@@ -12,7 +12,7 @@ spring:
   h2:
     console:
       enabled: true
-      path: /h2-console
+      path: /h2console
 
   datasource:
     driverClassName: org.h2.Driver
@@ -34,4 +34,4 @@ spring:
       hibernate.generate_statistics: true
 
 trackingDataFilter:
-  toExcludePath: /actuator/health , /login
+  toExcludePath: /actuator/health , /login, /h2console

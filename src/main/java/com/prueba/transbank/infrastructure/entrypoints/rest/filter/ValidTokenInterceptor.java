@@ -76,7 +76,7 @@ public class ValidTokenInterceptor extends OncePerRequestFilter {
 
 
     public boolean checkRequestUrl(String requestUrl) {
-        return EXCLUDE_URL.stream().anyMatch(entry -> requestUrl.endsWith(entry));
+        return EXCLUDE_URL.stream().anyMatch(entry -> requestUrl.contains(entry));
     }
 
 }
