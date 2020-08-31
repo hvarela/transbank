@@ -38,6 +38,16 @@ para ejeutar los test de arquitectura debe ejecutar el siguiente comado
 ./gradlew architectureTest
 ```
 
+## Test de mutacion y cobertura 
+
+para garantizar la calidad del codigo se utiliza pitest para  verificar la cobertura y test de mutacion. se debe ejecutar el siguiente comando 
+
+```
+./gradlew pitest
+
+```
+
+esto genera un reporte que se puede ver en build/reports/pitest/index.html
 
 ## Ejecucion del proyecto 
 
