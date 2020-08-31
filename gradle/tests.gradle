@@ -43,7 +43,10 @@ pitest {
     targetClasses = ['com.prueba.transbank.*']
     testSourceSets = [sourceSets.unitTest]
     excludedClasses = [
-            'com.prueba.transbank.infrastructure.entitys.*'
+            'com.prueba.transbank.infrastructure.entitys.*',
+            'com.prueba.transbank.domain.entities.error.*',
+            'com.prueba.transbank.infrastructure.configuration.*',
+            'com.prueba.transbank.infrastructure.schedulingtasks.*',
             ]
     threads = 4
     outputFormats = ['XML', 'HTML']
