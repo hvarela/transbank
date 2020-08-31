@@ -10,6 +10,10 @@
         <query>SELECT a FROM UserEntity a WHERE a.name = ?1 and a.password = ?2</query>
     </named-query>
 
+    <named-query name="VentasRepository.findByproductId">
+        <query>SELECT a FROM VentasEntity a WHERE a.producId = ?1</query>
+    </named-query>
+
 
 
 </entity-mappings>
