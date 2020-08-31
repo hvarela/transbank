@@ -14,7 +14,8 @@ INSERT INTO users(name, password) VALUES
 
 
 
-CREATE TABLE ventas (
+
+CREATE TABLE IF NOT EXISTS ventas (
   id INT AUTO_INCREMENT  PRIMARY KEY,
   producId INT NOT NULL,
   name VARCHAR(250) NOT NULL,

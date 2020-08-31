@@ -1,6 +1,6 @@
 package com.prueba.transbank.domain.usecase;
 
-import com.prueba.transbank.domain.entities.ventas.Sale;
+import com.prueba.transbank.domain.entities.sales.Sale;
 import com.prueba.transbank.domain.usecase.port.SalesRecordsDataProvider;
 import com.prueba.transbank.fixture.SaleFixture;
 import org.junit.Before;

@@ -1,7 +1,7 @@
 package com.prueba.transbank.fixture;
 
 
-import com.prueba.transbank.domain.entities.ventas.Sale;
+import com.prueba.transbank.domain.entities.sales.Sale;
 
 public class SaleFixture extends AbstractFixture<Sale> {
 

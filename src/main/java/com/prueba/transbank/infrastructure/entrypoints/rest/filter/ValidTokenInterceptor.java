@@ -45,12 +45,11 @@ public class ValidTokenInterceptor extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        logger.debug("Validating  bearer token");
 
         if (checkRequestUrl(request.getRequestURI())) {
             filterChain.doFilter(request, response);
         } else {
-            logger.info("Validating  bearer token");
+            logger.debug("Validating  bearer token");
 
             String bearer = request.getHeader("authorization");
 
@@ -61,13 +60,13 @@ public class ValidTokenInterceptor extends OncePerRequestFilter {
                 }
 
                 jwtTokenManager.isValidToken(bearer.substring(BEARER.length()));
+
+
             } catch (Exception e) {
                 logger.error("Spring Security Filter Chain Exception:", e);
                 resolver.resolveException(request, response, null, e);
+                return;
             }
-
-
-
 
             filterChain.doFilter(request, response);
 

@@ -1,11 +1,11 @@
-package com.prueba.transbank.infrastructure.entities;
+package com.prueba.transbank.infrastructure.entitys;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "users")
-public class VentasEntity implements Serializable {
+@Table(name = "ventas")
+public class SalesEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -25,23 +25,22 @@ public class VentasEntity implements Serializable {
 
     @Basic(optional = false)
     @Column(name = "price")
-    private Long price;
+    private Double price;
 
     @Basic(optional = false)
     @Column(name = "amount")
     private Integer amount;
 
 
-    public VentasEntity() {
+    public SalesEntity() {
 
     }
 
-    public VentasEntity(Integer id) {
+    public SalesEntity(Integer id) {
         this.id = id;
     }
 
-    public VentasEntity(Integer id, Integer productId,  String name, Long price, Integer amount) {
-        this.id = id;
+    public SalesEntity(Integer productId, String name, Double price, Integer amount) {
         this.producId = productId;
         this.name = name;
         this.price = price;
@@ -72,11 +71,11 @@ public class VentasEntity implements Serializable {
         this.name = name;
     }
 
-    public Long getPrice() {
+    public Double getPrice() {
         return this.price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -86,5 +85,16 @@ public class VentasEntity implements Serializable {
 
     public void setAmount(Integer amount) {
         this.amount = amount;
+    }
+
+    @Override
+    public String toString() {
+        return "SalesEntity{" +
+                "id=" + id +
+                ", producId=" + producId +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", amount=" + amount +
+                '}';
     }
 }

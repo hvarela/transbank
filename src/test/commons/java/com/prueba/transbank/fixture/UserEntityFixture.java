@@ -1,7 +1,7 @@
 package com.prueba.transbank.fixture;
 
 
-import com.prueba.transbank.infrastructure.entities.UserEntity;
+import com.prueba.transbank.infrastructure.entitys.UserEntity;
 
 public class UserEntityFixture extends AbstractFixture<UserEntity> {
 

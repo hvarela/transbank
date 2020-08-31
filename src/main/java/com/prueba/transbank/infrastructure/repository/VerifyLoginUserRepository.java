@@ -1,7 +1,7 @@
 package com.prueba.transbank.infrastructure.repository;
 
 import com.prueba.transbank.domain.usecase.port.VerifyLoginUserDataProvide;
-import com.prueba.transbank.infrastructure.entities.UserEntity;
+import com.prueba.transbank.infrastructure.entitys.UserEntity;
 import com.prueba.transbank.infrastructure.repository.RDBMS.UsersRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

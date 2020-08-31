@@ -70,5 +70,11 @@ public class ControllerExceptionHandler {
         return new ApiError(HttpStatus.UNAUTHORIZED.getReasonPhrase(), "handleTokenIsExpiredValidations", e.getMessage());
     }
 
+    @ExceptionHandler(SaleDataErrorException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiError handleSaleDataValidations(SaleDataErrorException e) {
+        logger.error(e.getMessage());
+        return new ApiError(HttpStatus.BAD_REQUEST.getReasonPhrase(), "handleSaleDataValidations", e.getMessage());
+    }
 
 }

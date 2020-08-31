@@ -3,7 +3,7 @@ package com.prueba.transbank.infrastructure.repository;
 import com.prueba.transbank.domain.entities.user.User;
 import com.prueba.transbank.fixture.UserEntityFixture;
 import com.prueba.transbank.fixture.UserFixture;
-import com.prueba.transbank.infrastructure.entities.UserEntity;
+import com.prueba.transbank.infrastructure.entitys.UserEntity;
 import com.prueba.transbank.infrastructure.repository.RDBMS.UsersRepository;
 import org.junit.Before;
 import org.junit.Test;

@@ -17,8 +17,8 @@ public class PackagesLayerDependenciesRuleTest {
 
     @ArchTest
     public static final ArchRule entitiesShouldNotDependOnOtherPackages =
-            ArchRuleDefinition.classes().that().resideInAPackage("..domain.entities..")
-                    .should().dependOnClassesThat().resideInAnyPackage("..domain.entities..", "java..");
+            ArchRuleDefinition.classes().that().resideInAPackage("..domain.entitys..")
+                    .should().dependOnClassesThat().resideInAnyPackage("..domain.entitys..", "java..");
 
     @ArchTest
     public static final ArchRule domainShouldNotDependOnOtherPackages =

@@ -1,4 +1,4 @@
-package com.prueba.transbank.domain.entities.ventas;
+package com.prueba.transbank.domain.entities.sales;
 
 import com.prueba.transbank.domain.entities.error.SaleDataErrorException;
 

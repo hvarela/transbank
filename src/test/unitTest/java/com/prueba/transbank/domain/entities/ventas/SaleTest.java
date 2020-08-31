@@ -1,6 +1,7 @@
 package com.prueba.transbank.domain.entities.ventas;
 
 import com.prueba.transbank.domain.entities.error.SaleDataErrorException;
+import com.prueba.transbank.domain.entities.sales.Sale;
 import com.prueba.transbank.fixture.SaleFixture;
 import org.junit.Test;
 import org.junit.runner.RunWith;
