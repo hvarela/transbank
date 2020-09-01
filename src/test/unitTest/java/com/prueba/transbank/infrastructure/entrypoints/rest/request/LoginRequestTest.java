@@ -26,7 +26,7 @@ public class LoginRequestTest {
 
     @Test
     public void testVerifyCreateUserRequestSetter() {
-        LoginRequest loginRequest = UserRequestFixture.create().build();
+        LoginRequest loginRequest = new LoginRequest();
 
         loginRequest.setName(NAME);
         loginRequest.setPassword(PASS);
@@ -34,4 +34,5 @@ public class LoginRequestTest {
         assertEquals(NAME, loginRequest.getName());
         assertEquals(PASS, loginRequest.getPassword());
     }
+
 }
