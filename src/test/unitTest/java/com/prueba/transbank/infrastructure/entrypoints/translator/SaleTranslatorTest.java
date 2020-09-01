@@ -34,7 +34,9 @@ public class SaleTranslatorTest {
 
         Sale sale = SaleFixture.create().build();
 
-        SaleResponse saleResponse = SaleTranslator.translate(sale,9);
+        SaleTranslator saleTranslator = new SaleTranslator();
+
+        SaleResponse saleResponse = saleTranslator.translate(sale,9);
 
         String s = sale.toString();
 

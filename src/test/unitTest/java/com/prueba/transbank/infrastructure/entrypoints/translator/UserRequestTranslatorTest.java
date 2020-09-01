@@ -14,7 +14,9 @@ public class UserRequestTranslatorTest {
 
         LoginRequest loginRequest = UserRequestFixture.create().withName("tito").withPassword("tito213").build();
 
-        User user = UserRequestTranslator.translate(loginRequest);
+        UserRequestTranslator userRequestTranslator = new UserRequestTranslator();
+
+        User user = userRequestTranslator.translate(loginRequest);
 
         assertEquals(loginRequest.getName(), user.getName());
         assertEquals(loginRequest.getPassword(), loginRequest.getPassword());

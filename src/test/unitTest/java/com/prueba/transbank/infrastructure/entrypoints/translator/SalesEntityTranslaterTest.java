@@ -12,12 +12,18 @@ import static org.junit.Assert.*;
 @RunWith(JUnit4.class)
 public class SalesEntityTranslaterTest {
 
+
+
+
+
     @Test
     public void ShouldTranslateSalesEntity2Sale(){
 
+        SalesEntityTranslater salesEntityTranslater = new SalesEntityTranslater();
+
         SalesEntity salesEntity = SalesEntityFixture.create().build();
 
-        Sale sale = SalesEntityTranslater.translate(salesEntity);
+        Sale sale = salesEntityTranslater.translate(salesEntity);
 
         assertEquals(Integer.valueOf(sale.getAmount()), salesEntity.getAmount() );
         assertEquals(Integer.valueOf(sale.getId()), salesEntity.getId() );
