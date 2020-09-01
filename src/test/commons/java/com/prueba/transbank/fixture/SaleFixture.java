@@ -5,7 +5,7 @@ import com.prueba.transbank.domain.entities.sales.Sale;
 
 public class SaleFixture extends AbstractFixture<Sale> {
 
-    private static final  String  DEFAULT_NAME= "";
+    private static final  String  DEFAULT_NAME= "roca";
     private static final  int  DEFAULT_PRODUC_ID= 123;
     private static final  int  DEFAULT_AMOUNT= 1;
     private static final  double  DEFAULT_PRICE= 1.0;
