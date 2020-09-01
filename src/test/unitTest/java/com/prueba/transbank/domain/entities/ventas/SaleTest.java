@@ -55,7 +55,7 @@ public class SaleTest {
             sale = SaleFixture.create()
                     .withAmount(21)
                     .withName("rosas")
-                    .withProductId(-34)
+                    .withProductId(0)
                     .withPrice(31).build();
         });
 
@@ -65,7 +65,7 @@ public class SaleTest {
         assertEquals(expectedMessage,actualMessage);
     }
 
-    @Test( expected =  SaleDataErrorException.class)
+    @Test
     public void shouldCreateSaleSuccess() {
 
 
@@ -75,7 +75,7 @@ public class SaleTest {
                 .withProductId(34)
                 .withPrice(31).build();
 
-        assertEquals("rosa", sale.getName());
+        assertEquals("rosas", sale.getName());
         assertEquals(21, sale.getAmount());
         assertEquals(34, sale.getProducId());
         assertTrue(Double.compare(31, sale.getPrice())==0);
@@ -103,15 +103,26 @@ public class SaleTest {
     @Test
     public void shouldPrintSaleWithCallMethodToString(){
 
-       sale = SaleFixture.create()
-                    .withAmount(9)
-                    .withName("rosas")
-                    .withProductId(34)
-                    .withPrice(31).build();
+       sale = SaleFixture.create().withName("casa").build();
+
+       sale.setName("rosas");
+       sale.setAmount(9);
+       sale.setPrice(31);
+       sale.setProducId(34);
+
+
+
 
         String s = sale.toString();
 
+        assertEquals(1,sale.getId());
+        assertTrue( s.contains("Sale{"));
         assertTrue( s.contains("name='rosas'"));
+        assertTrue( s.contains("amount=9"));
+        assertTrue( s.contains("producId=34"));
+        assertTrue( s.contains("price=31"));
+        assertTrue( s.contains("}"));
+
     }
 
 }
