@@ -2,6 +2,7 @@ package com.prueba.transbank.infrastructure.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.prueba.transbank.domain.entities.error.InvalidTokenException;
 import com.prueba.transbank.domain.entities.error.TokenIsExpiredException;
 import org.junit.Before;
 import org.junit.Test;
@@ -54,6 +55,13 @@ public class JwtTokenManagerTest {
         TimeUnit.SECONDS.sleep(2);
 
         jwtTokenManager.isValidToken(token);
+
+    }
+
+    @Test(expected = InvalidTokenException.class)
+    public void shouldThrowExceptionForInvalidToken(){
+
+        jwtTokenManager.isValidToken("23132132143132");
 
     }
 }
