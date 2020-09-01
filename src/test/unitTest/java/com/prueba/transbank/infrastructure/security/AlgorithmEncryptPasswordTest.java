@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @TestPropertySource(locations = "classpath:secrets/secret.properties")
 public class AlgorithmEncryptPasswordTest {
+
 
     private AlgorithmEncryptPassword algorithmEncryptPassword;
 
@@ -34,7 +36,7 @@ public class AlgorithmEncryptPasswordTest {
 
         String pass = algorithmEncryptPassword.generateSecurePassword("tito");
 
-        assertTrue( pass != null && pass.length()>30);
+        assertEquals("aKoKKC5JF4Y/VAT6n6sbN9itYcKPDuWRCIhVaPH+zzLP/Wj8wSEMcxPdVl1CWCrWTN2NYqboIKW1HB6PjJRxXA==", pass );
     }
 
     @Test( expected = AssertionError.class)
@@ -42,7 +44,7 @@ public class AlgorithmEncryptPasswordTest {
 
         algorithmEncryptPassword = new AlgorithmEncryptPassword( salt, keyLength, iteration, "tito");
 
-        String pass = algorithmEncryptPassword.generateSecurePassword("tito");
+        algorithmEncryptPassword.generateSecurePassword("tito");
     }
 
     @Test( expected = IllegalArgumentException.class)
@@ -69,5 +71,6 @@ public class AlgorithmEncryptPasswordTest {
 
         String pass = algorithmEncryptPassword.generateSecurePassword("tito");
         assertTrue( pass.isEmpty());
+
     }
 }

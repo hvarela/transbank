@@ -51,7 +51,7 @@ pitest {
             ]
     threads = 4
     outputFormats = ['XML', 'HTML']
-    coverageThreshold = 90
+    coverageThreshold = 95
     mutationThreshold = 90
     timestampedReports = false
     timeoutFactor = '5000'

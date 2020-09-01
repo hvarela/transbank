@@ -25,7 +25,7 @@ public class SoldsProductsListener {
     }
 
     @JmsListener(destination = "salesChannels", containerFactory = "myFactory")
-    private void getSale(SalesEntity salesEntity) {
+    public void getSale(SalesEntity salesEntity) {
 
         Sale sale = SalesEntityTranslater.translate(salesEntity);
         logger.debug(" listener recibe  ", sale.toString());

@@ -40,7 +40,6 @@ public class AlgorithmEncryptPassword implements AlgorithmEncryptPasswordDataPro
 
     private  byte[] hash(char[] password) {
         PBEKeySpec spec = new PBEKeySpec(password,  salt.getBytes(), iteration, keyLength);
-        Arrays.fill(password, Character.MIN_VALUE);
         try {
             SecretKeyFactory skf = SecretKeyFactory.getInstance(algorithm);
             return skf.generateSecret(spec).getEncoded();

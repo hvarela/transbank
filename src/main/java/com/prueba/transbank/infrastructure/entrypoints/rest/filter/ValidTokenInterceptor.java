@@ -67,6 +67,8 @@ public class ValidTokenInterceptor extends OncePerRequestFilter {
                 return;
             }
 
+            logger.debug("token validado ok");
+
             filterChain.doFilter(request, response);
 
         }
