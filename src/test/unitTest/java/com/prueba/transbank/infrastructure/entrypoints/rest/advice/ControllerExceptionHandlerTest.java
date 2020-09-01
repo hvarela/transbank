@@ -85,4 +85,31 @@ public class ControllerExceptionHandlerTest {
         assertEquals(HttpStatus.UNAUTHORIZED.getReasonPhrase(), apiError.getStatus());
         assertEquals(getMethodName(), apiError.getHandler());
     }
+
+    @Test
+    public void handleRQWithoutTokenValidations() {
+        ApiError apiError = controllerExceptionHandler.handleRQWithoutTokenValidations(new RequestWithoutTokenException());
+
+        assertEquals(ErrorType.REQ_WITHOUT_TOKEN.getDescription(), apiError.getError());
+        assertEquals(HttpStatus.BAD_REQUEST.getReasonPhrase(), apiError.getStatus());
+        assertEquals(getMethodName(), apiError.getHandler());
+    }
+
+    @Test
+    public void handleTokenIsExpiredValidations() {
+        ApiError apiError = controllerExceptionHandler.handleTokenIsExpiredValidations(new TokenIsExpiredException());
+
+        assertEquals(ErrorType.TOKEN_EXPIRED_ERROR.getDescription(), apiError.getError());
+        assertEquals(HttpStatus.UNAUTHORIZED.getReasonPhrase(), apiError.getStatus());
+        assertEquals(getMethodName(), apiError.getHandler());
+    }
+
+    @Test
+    public void handleSaleDataValidations() {
+        ApiError apiError = controllerExceptionHandler.handleSaleDataValidations(new SaleDataErrorException("tito"));
+
+        assertEquals(ErrorType.SALE_DATA_ERROR.getDescription()+"tito", apiError.getError());
+        assertEquals(HttpStatus.BAD_REQUEST.getReasonPhrase(), apiError.getStatus());
+        assertEquals(getMethodName(), apiError.getHandler());
+    }
 }
