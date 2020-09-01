@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestControllerAdvice(annotations = RestController.class)
+@RestControllerAdvice()
 public class ControllerExceptionHandler {
 
     private Logger logger = LoggerFactory.getLogger(ControllerExceptionHandler.class);
