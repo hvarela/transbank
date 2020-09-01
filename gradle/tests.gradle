@@ -47,6 +47,7 @@ pitest {
             'com.prueba.transbank.domain.entities.error.*',
             'com.prueba.transbank.infrastructure.configuration.*',
             'com.prueba.transbank.infrastructure.schedulingtasks.*',
+            'com.prueba.transbank.infrastructure.logger.*',
             ]
     threads = 4
     outputFormats = ['XML', 'HTML']
